@@ -1,9 +1,13 @@
 // Main entry point for the Qremo app
 import 'package:pie_chart/pie_chart.dart';
 import 'package:flutter/material.dart';
-
+import 'package:http/http.dart' as http;
 import 'package:flutter_svg/flutter_svg.dart';
 
+String url = '';
+Color purple = Color.fromRGBO(111, 56, 242, 1);
+Color orange = Color.fromRGBO(242, 149, 56, 1);
+Color green = Color.fromRGBO(76,244,95,1);
 List<String> subjectsList = [
   "Maths",
   "Biology",
@@ -25,7 +29,7 @@ class QremoApp extends StatelessWidget {
 
       theme: ThemeData(primarySwatch: Colors.green),
       darkTheme: ThemeData.dark(),
-      themeMode: ThemeMode.system, // Use system theme (light or dark)
+      themeMode: ThemeMode.system,
       home: const HomePage(),
       debugShowCheckedModeBanner: false,
     );
@@ -187,10 +191,7 @@ class Profile extends StatelessWidget {
                 child: Stack(
                   children: [
                     // Container with the background and content
-                    Material(
-                      color: Colors
-                          .transparent, // Make sure the Material widget is transparent
-                      child: Container(
+                    Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: Color.fromRGBO(30, 30, 46, 1),
@@ -227,7 +228,6 @@ class Profile extends StatelessWidget {
                           ],
                         ),
                       ),
-                    ),
 
                     // InkWell on top of the container
                     Positioned.fill(
@@ -271,7 +271,7 @@ class NotesPage extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           automaticallyImplyLeading: false,
-        ),
+        ), 
         body: ListView.builder(
           itemCount: subjectsList.length,
           itemBuilder: (context, i) {
@@ -290,22 +290,25 @@ class NotesPage extends StatelessWidget {
   }
 }
 
+
 class QuizPage extends StatelessWidget {
   const QuizPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-            alignment: Alignment.topCenter,
-            margin: const EdgeInsets.only(left: 15, right: 15),
-            decoration: BoxDecoration(
-              color: Theme.of(context).cardColor,
-              borderRadius: const BorderRadius.all(
-                  Radius.circular(20)), // Rounded corners
-            ),
-            child: SingleChildScrollView(
-                child: Column(children: [
+      body: Container(
+        alignment: Alignment.topCenter,
+        margin: const EdgeInsets.only(left: 15, right: 15),
+        decoration: BoxDecoration(
+          color: Theme.of(context).cardColor,
+          borderRadius: const BorderRadius.all(
+            Radius.circular(20), // Rounded corners
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
               AppBar(
                 title: Text("Quiz page"),
               ),
@@ -319,16 +322,19 @@ class QuizPage extends StatelessWidget {
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: const BorderRadius.all(
-                        Radius.circular(20)), // Rounded corners
+                      Radius.circular(20),
+                    ), // Rounded corners
                     borderSide: BorderSide(color: Colors.green, width: 2),
                   ),
                   focusedBorder: OutlineInputBorder(
                     // Border when the field is focused
                     borderRadius: const BorderRadius.all(
-                        Radius.circular(20)), // Rounded corners
+                      Radius.circular(20),
+                    ), // Rounded corners
                     borderSide: BorderSide(
-                        color: Colors.green,
-                        width: 2), // Border color and width
+                      color: Colors.green,
+                      width: 2,
+                    ), // Border color and width
                   ),
                 ),
               ),
@@ -338,30 +344,18 @@ class QuizPage extends StatelessWidget {
                 width: 360,
                 height: 200,
                 decoration: BoxDecoration(
-                    border: Border(
-                        top: BorderSide(
-                            color: Colors.green,
-                            width: 2,
-                            style: BorderStyle.solid),
-                        left: BorderSide(
-                            color: Colors.green,
-                            width: 2,
-                            style: BorderStyle.solid),
-                        right: BorderSide(
-                            color: Colors.green,
-                            width: 2,
-                            style: BorderStyle.solid),
-                        bottom: BorderSide(
-                          color: Colors.green,
-                          width: 2,
-                          style: BorderStyle.solid,
-                        )),
-                    borderRadius: BorderRadius.circular(20)),
-              )
-            ]))));
+                  color: Colors.green,
+                  border: Border.all(color: Colors.orange, width: 2),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
-
 // Notes Page
 class HomePageNew extends StatelessWidget {
   const HomePageNew({super.key});
@@ -498,105 +492,113 @@ class _SubjectMenuState extends State<SubjectMenu> {
         length: 3,
         initialIndex: 1,
         child: Scaffold(
-          appBar: AppBar(
-            title: Text(widget.nameOfSubject),
-            actions: [
-              IconButton(
-                icon: Icon(Icons.search_rounded),
-                onPressed: () {
-                  setState(() {
-                    widget.searchButton = !widget.searchButton;
-                  });
-                },
-              ),
-            ],
-          ),
-          body: Container(
-            alignment: Alignment.topCenter,
-            margin: const EdgeInsets.only(left: 15, right: 15),
-            decoration: BoxDecoration(
-              color: Theme.of(context).cardColor,
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
+            appBar: AppBar(
+              title: Text(widget.nameOfSubject),
+              actions: [
+                IconButton(
+                  icon: Icon(Icons.search_rounded),
+                  onPressed: () {
+                    setState(() {
+                      widget.searchButton = !widget.searchButton;
+                    });
+                  },
+                ),
+              ],
             ),
-            child: SingleChildScrollView(
-              child: Column(children: [
-                widget.searchButton
-                    ? TextFormField(
-                        cursorColor: Colors.green,
-                        decoration: InputDecoration(
-                          labelText: 'Search ${widget.nameOfSubject}',
-                          border: OutlineInputBorder(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(20)),
-                            borderSide:
-                                BorderSide(color: Colors.green, width: 2),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(20)),
-                            borderSide:
-                                BorderSide(color: Colors.green, width: 2),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(20)),
-                            borderSide:
-                                BorderSide(color: Colors.green, width: 2),
-                          ),
-                        ),
-                      )
-                    : Container(
-                        alignment: Alignment.bottomCenter,
-                        margin: EdgeInsets.only(top: 5),
-                        width: 360,
-                        height: 175,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.green, width: 2),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Wrap(
-                          runSpacing: 10,
-                          children: [
-                            Row(
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.all(10),
-                                      width: 125,
-                                      height: 90,
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: Colors.green, width: 2),
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                    ),
-                                  ],
-                                ),
-                                Text(
-                                  textAlign: TextAlign.center,
-                                  "Topic Name",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ],
+            body: Container(
+                alignment: Alignment.topCenter,
+                margin: const EdgeInsets.only(left: 15, right: 15),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).cardColor,
+                  borderRadius: const BorderRadius.all(Radius.circular(20)),
+                ),
+                child: SingleChildScrollView(
+                    child: Column(children: [
+                  widget.searchButton
+                      ? TextFormField(
+                          cursorColor: Colors.green,
+                          decoration: InputDecoration(
+                            labelText: 'Search ${widget.nameOfSubject}',
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(20)),
+                              borderSide:
+                                  BorderSide(color: Colors.green, width: 2),
                             ),
-                            Column(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                      top: 5, bottom: 35, left: 10),
-                                  child: Text(
-                                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit"),
-                                )
-                              ],
-                            )
-                          ],
-                        )),
-              ]),
-            ),
-          ),
-        ));
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(20)),
+                              borderSide:
+                                  BorderSide(color: Colors.green, width: 2),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(20)),
+                              borderSide:
+                                  BorderSide(color: Colors.green, width: 2),
+                            ),
+                          )
+                        )
+                      :ListView.builder(
+                          itemCount: 10,
+                          shrinkWrap: true,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Container(
+                                alignment: Alignment.bottomCenter,
+                                margin: EdgeInsets.only(top: 10),
+                                width: 360,
+                                height: 150,
+                                decoration: BoxDecoration(
+                                color: green,
+                                  border:
+                                      Border.all(color: Colors.black, width: 2),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Wrap(
+                                  runSpacing: 5,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                  left: 9, right: 10, top: 10),
+                                              width: 124,
+                                              height: 89,
+                                              decoration: BoxDecoration(
+                                                                                                   border: Border.all(
+                                                      color: Colors.black,
+                                                      width: 2),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          19)),
+                                            ),
+                                          ],
+                                        ),
+                                        Text(
+                                          textAlign: TextAlign.center,
+                                          "Topic Name",
+                                          style: TextStyle(color: orange,fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              bottom: 34, left: 10),
+                                          child: Text(
+                                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit",style: TextStyle(color: orange,fontWeight: FontWeight.bold)),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ));
+                          })
+                ])))));
   }
 }
 

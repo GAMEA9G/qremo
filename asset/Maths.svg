@@ -1,9 +1,71 @@
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
-<svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="800px" height="800px" viewBox="-15.9 -15.9 125.34 125.34" xml:space="preserve" stroke="#000000">
-<g id="SVGRepo_bgCarrier" stroke-width="0" transform="translate(0,0), scale(1)">
-<rect x="-15.9" y="-15.9" width="125.34" height="125.34" rx="62.67" fill="#26a269" strokewidth="0"/>
-</g>
-<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0.37414400000000003"/>
-<g id="SVGRepo_iconCarrier"> <g> <g> <path d="M71.378,76.484L57.269,36.579c0.715-0.578,1.018-1.513,1.045-2.118V14.879c0-0.44-0.356-0.77-0.77-0.77h-5.474V4.016 c0-3.576-2.421-3.988-2.668-4.016h-5.28c-1.045,0.138-3.025,1.128-3.025,4.016c0,2.172,0,7.453,0,10.093h-5.5 c-0.44,0-0.77,0.357-0.77,0.77v0.77v18.812c0,0.055,0,0.138,0.028,0.192c0.027,0.055,0.33,1.238,1.265,1.953l-13.999,39.96 c-0.027,0.138-0.743,3.302,1.43,6.902l1.897,3.797l-0.715,3.547c-0.357,1.844-0.303,2.09-0.055,2.42 c0.138,0.193,0.385,0.304,0.633,0.304c0.688,0,0.908-0.66,1.238-1.731L27.1,90.1c0.11,0.026,0.192,0.055,0.33,0.055 c0.302-0.027,0.578-0.221,0.688-0.495l18.014-47.386h1.21h0.137l17.987,47.333c0.108,0.301,0.385,0.494,0.688,0.494 c0.247,0.027,0.522-0.109,0.66-0.303l0.742,2.09c0.082,0.221,0.247,0.413,0.468,0.469c0.055,0.027,0.632,0.219,1.292,0.219l0,0 c1.128,0,1.926-0.576,2.173-1.594c0.027-0.139,0.027-0.303-0.026-0.44l-2.008-6.052l0.494-0.988 C72.202,79.868,71.433,76.704,71.378,76.484z"/> </g> </g> </g>
-</svg>
+
+<svg
+   fill="#000000"
+   version="1.1"
+   id="Capa_1"
+   width="800px"
+   height="800px"
+   viewBox="-15.9 -15.9 125.34 125.34"
+   xml:space="preserve"
+   stroke="#000000"
+   sodipodi:docname="Maths.svg"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs2" /><sodipodi:namedview
+   id="namedview2"
+   pagecolor="#505050"
+   bordercolor="#eeeeee"
+   borderopacity="1"
+   inkscape:showpageshadow="0"
+   inkscape:pageopacity="0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#505050"
+   inkscape:zoom="0.89125"
+   inkscape:cx="400"
+   inkscape:cy="399.43899"
+   inkscape:window-width="1900"
+   inkscape:window-height="1028"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Capa_1" />
+
+<g
+   id="SVGRepo_bgCarrier"
+   stroke-width="0"
+   transform="translate(0,0), scale(1)"
+   style="fill:#cba6f7;fill-opacity:1">
+
+<rect
+   x="-15.9"
+   y="-15.9"
+   width="125.34"
+   height="125.34"
+   rx="62.67"
+   fill="#26a269"
+   strokewidth="0"
+   id="rect1"
+   style="fill:#cba6f7;fill-opacity:1" />
+
+</g>
+
+<g
+   id="SVGRepo_tracerCarrier"
+   stroke-linecap="round"
+   stroke-linejoin="round"
+   stroke="#CCCCCC"
+   stroke-width="0.37414400000000003" />
+
+<g
+   id="SVGRepo_iconCarrier"> <g
+   id="g2"> <g
+   id="g1"> <path
+   d="M71.378,76.484L57.269,36.579c0.715-0.578,1.018-1.513,1.045-2.118V14.879c0-0.44-0.356-0.77-0.77-0.77h-5.474V4.016 c0-3.576-2.421-3.988-2.668-4.016h-5.28c-1.045,0.138-3.025,1.128-3.025,4.016c0,2.172,0,7.453,0,10.093h-5.5 c-0.44,0-0.77,0.357-0.77,0.77v0.77v18.812c0,0.055,0,0.138,0.028,0.192c0.027,0.055,0.33,1.238,1.265,1.953l-13.999,39.96 c-0.027,0.138-0.743,3.302,1.43,6.902l1.897,3.797l-0.715,3.547c-0.357,1.844-0.303,2.09-0.055,2.42 c0.138,0.193,0.385,0.304,0.633,0.304c0.688,0,0.908-0.66,1.238-1.731L27.1,90.1c0.11,0.026,0.192,0.055,0.33,0.055 c0.302-0.027,0.578-0.221,0.688-0.495l18.014-47.386h1.21h0.137l17.987,47.333c0.108,0.301,0.385,0.494,0.688,0.494 c0.247,0.027,0.522-0.109,0.66-0.303l0.742,2.09c0.082,0.221,0.247,0.413,0.468,0.469c0.055,0.027,0.632,0.219,1.292,0.219l0,0 c1.128,0,1.926-0.576,2.173-1.594c0.027-0.139,0.027-0.303-0.026-0.44l-2.008-6.052l0.494-0.988 C72.202,79.868,71.433,76.704,71.378,76.484z"
+   id="path1" /> </g> </g> </g>
+
+</svg>

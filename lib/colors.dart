@@ -1,0 +1,20 @@
+part of 'main.dart';
+Color rosewater= Color.fromRGBO(245, 224, 220, 1);
+Color flamingo = Color.fromRGBO(242, 205, 205, 1);
+Color pink = Color.fromRGBO(245,194,231, 1);
+Color mauve = Color.fromRGBO(203,166,247,1);
+Color red = Color.fromRGBO(243,139,168,1);
+Color marooon = Color.fromRGBO(235,160,175,1);
+Color peach = Color.fromRGBO(250,179, 135, 1);
+Color yellow = Color.fromRGBO(249,226,213,1);
+Color green = Color.fromRGBO(166,227,161,1);
+Color teal = Color.fromRGBO(148, 226, 213, 1);
+Color sky = Color.fromRGBO(137, 220, 235, 1);
+Color sappire = Color.fromRGBO(116, 199, 236, 1);
+Color blue = Color.fromRGBO(137, 180, 250, 1);
+Color lavender = Color.fromRGBO(180, 190, 254, 1);
+Color text = Color.fromRGBO(205, 214, 244, 1);
+Color base = Color.fromRGBO(30, 30, 46, 1);
+Color mantle = Color.fromRGBO(24,24, 27, 1);
+Color crust = Color.fromRGBO(17, 17, 27, 1);
+

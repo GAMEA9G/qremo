@@ -1,8 +1,11 @@
-// Main entry point for the Qremo app
+// Mai  entry point for the Qremo app
 import 'package:pie_chart/pie_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:qremo/themeDectector.dart';
+import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+import 'package:provider/provider.dart';
 
 part 'colors.dart';
 part 'profile.dart';
@@ -10,7 +13,8 @@ part 'notes.dart';
 part 'quiz.dart';
 part 'home.dart';
 part 'subject.dart';
-String url = '';
+ 
+
 List<String> subjectsList = [
   "Maths",
   "Biology",
@@ -20,26 +24,36 @@ List<String> subjectsList = [
   "English",
   "History"
 ];
-void main() => runApp(QremoApp());
+void main() => runApp(
+  ChangeNotifierProvider(create: (_)=> ThemeProvider(),
+  child: const QremoApp(),
+  )
+);
 
 
 class QremoApp extends StatelessWidget {
+  static ThemeMode _themeMode = ThemeMode.system;
   const QremoApp({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return Consumer<ThemeProvider>(
+  builder: (context,themeprovider,child){
+        return   MaterialApp(
+     
       title: 'Qremo',
-
-      theme: ThemeData(colorScheme: ColorScheme(brightness:Brightness.dark,primary: crust,onPrimary: mauve, secondary:mantle ,onSecondary: lavender,surface: crust,onSurface: text,error:red,onError: text)),
+      
+       
       darkTheme: ThemeData.dark(),
-      themeMode: ThemeMode.system,
+      themeMode: ThemeProvider().themeMode,
       home: const HomePage(),
       debugShowCheckedModeBanner: false,
     );
+
+      }
+);
   }
 }
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -78,8 +92,8 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) => setState(() => _currentIndex = index),
-        unselectedItemColor: rosewater,
-        selectedItemColor: pink,
+        unselectedItemColor: ThemeProvider().themeMode == ThemeMode.dark ? rosewaterDark :rosewaterLight,
+        selectedItemColor:  ThemeProvider().themeMode == ThemeMode.dark ? pinkDark : pinkLight,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_filled),

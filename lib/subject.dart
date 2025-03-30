@@ -42,26 +42,29 @@ class _SubjectMenuState extends State<SubjectMenu> {
                     child: Column(children: [
                   widget.searchButton
                       ? TextFormField(
-                          cursorColor: mauve,
+                          cursorColor: ThemeProvider().themeMode == ThemeMode.dark ? mauveDark : mauveLight,
                           decoration: InputDecoration(
                             labelText: 'Search ${widget.nameOfSubject}',
                             border: OutlineInputBorder(
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(20)),
                               borderSide:
-                                  BorderSide(color: mauve, width: 2),
+                                  BorderSide(color: ThemeProvider().themeMode == ThemeMode.dark ? mauveDark : mauveLight,
+ width: 2),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(20)),
                               borderSide:
-                                  BorderSide(color: mauve, width: 2),
+                                  BorderSide(color: ThemeProvider().themeMode == ThemeMode.dark ? mauveDark : mauveLight,
+ width: 2),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(20)),
                               borderSide:
-                                  BorderSide(color: mauve, width: 2),
+                                  BorderSide(color: ThemeProvider().themeMode == ThemeMode.dark ? mauveDark : mauveLight,
+ width: 2),
                             ),
                           )
                         )
@@ -69,15 +72,18 @@ class _SubjectMenuState extends State<SubjectMenu> {
                           itemCount: 10,
                           shrinkWrap: true,
                           itemBuilder: (BuildContext context, int index) {
-                            return Container(
+                            return SingleChildScrollView(
+                  child:   Container(
+                    
                                 alignment: Alignment.bottomCenter,
                                 margin: EdgeInsets.only(top: 10),
                                 width: 360,
+                                 
                                 height: 150,
                                 decoration: BoxDecoration(
-                                color: base,
-                                  border:
-                                      Border.all(color: teal, width: 2),
+                                                         color: Theme.of(context).colorScheme.surfaceContainer,
+                        border:
+                                      Border.all(color: Theme.of(context).brightness ==Brightness.light ? tealLight : tealDark, width: 2),
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: Wrap(
@@ -97,9 +103,9 @@ class _SubjectMenuState extends State<SubjectMenu> {
                                               height: 89,
                                               decoration: BoxDecoration(
                                                                                                    border: Border.all(
-                                                      color: teal,
-                                                      width: 2),
-                                                  borderRadius:
+                                                                                                           width: 2, color: Theme.of(context).brightness ==Brightness.light ? tealLight : tealDark,)
+                                    ,
+                                                                                     borderRadius:
                                                       BorderRadius.circular(
                                                           19)),
                                             ),
@@ -108,7 +114,7 @@ class _SubjectMenuState extends State<SubjectMenu> {
                                         Text(
                                           textAlign: TextAlign.center,
                                           "Topic Name",
-                                          style: TextStyle(color: text,fontWeight: FontWeight.bold),
+                                          style: TextStyle(fontWeight: FontWeight.bold),
                                         ),
                                       ],
                                     ),
@@ -118,13 +124,13 @@ class _SubjectMenuState extends State<SubjectMenu> {
                                           padding: EdgeInsets.only(
                                               bottom: 34, left: 10),
                                           child: Text(
-                                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit",style: TextStyle(color:text ,fontWeight: FontWeight.bold)),
+                                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit",style: TextStyle(fontWeight: FontWeight.bold)),
                                         )
                                       ],
                                     )
-                                  ],
-                                ));
-                          })
+                                  ])));
+                                
+                           })
                 ])))));
   }
 }

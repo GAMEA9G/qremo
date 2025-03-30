@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
+
+<svg
+   width="256px"
+   height="256px"
+   viewBox="-3.2 -3.2 70.40 70.40"
+   id="Layer_1"
+   data-name="Layer 1"
+   fill="#000000"
+   version="1.1"
+   sodipodi:docname="Geography_light.svg"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs5" />
+  <sodipodi:namedview
+     id="namedview5"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:zoom="2.7851562"
+     inkscape:cx="128"
+     inkscape:cy="128.17953"
+     inkscape:window-width="1408"
+     inkscape:window-height="1028"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Layer_1" />
+  <g
+     id="SVGRepo_bgCarrier"
+     stroke-width="0"
+     style="fill:#8839ef;fill-opacity:1">
+    <rect
+       x="-3.2"
+       y="-3.2"
+       width="70.40"
+       height="70.40"
+       rx="35.2"
+       fill="#26a269"
+       strokewidth="0"
+       id="rect1"
+       style="fill:#8839ef;fill-opacity:1" />
+  </g>
+  <g
+     id="SVGRepo_tracerCarrier"
+     stroke-linecap="round"
+     stroke-linejoin="round" />
+  <g
+     id="SVGRepo_iconCarrier"
+     transform="translate(-0.6911641,1.3823282)">
+    <path
+       d="m 47.61,16.34 -2.77,3.55 a 1.18,1.18 0 0 1 -0.91,0.44 h -3.8 a 1.21,1.21 0 0 1 -0.58,-0.16 l -1.43,-0.83 a 1.14,1.14 0 0 0 -1.24,0.05 l -2.15,1.54 a 1.14,1.14 0 0 1 -1.31,0 L 29.14,18 A 1.16,1.16 0 0 1 28.88,16.35 L 34.7,8.84"
+       fill="none"
+       stroke="#000000"
+       stroke-linecap="round"
+       stroke-miterlimit="10"
+       stroke-width="3"
+       id="path1" />
+    <circle
+       cx="33.91"
+       cy="24.719999"
+       r="16.540001"
+       fill="none"
+       stroke="#000000"
+       stroke-linecap="round"
+       stroke-miterlimit="10"
+       stroke-width="3"
+       id="circle1" />
+    <path
+       d="M 49.17,40.56 A 21.72,21.72 0 0 1 18.39,9.91"
+       fill="none"
+       stroke="#000000"
+       stroke-linecap="round"
+       stroke-miterlimit="10"
+       stroke-width="3"
+       id="path2" />
+    <path
+       d="m 20.1,33.83 5.43,-4.64 a 1.16,1.16 0 0 1 1.41,-0.09 l 2.42,1.66 a 1.13,1.13 0 0 0 1.12,0.1 l 3.7,-2.5 a 1.13,1.13 0 0 1 1.16,0.12 l 4,2.31 a 1.15,1.15 0 0 1 0.21,1.63 l -2.34,4.06 a 1.15,1.15 0 0 1 -1.35,0.35 l -3.63,-1 a 1.15,1.15 0 0 0 -1.59,0.94 l -0.42,4.07"
+       fill="none"
+       stroke="#000000"
+       stroke-linecap="round"
+       stroke-miterlimit="10"
+       stroke-width="3"
+       id="path3" />
+    <line
+       x1="45.400002"
+       y1="36.619999"
+       x2="51.790001"
+       y2="43.290001"
+       fill="none"
+       stroke="#000000"
+       stroke-linecap="round"
+       stroke-miterlimit="10"
+       stroke-width="3"
+       id="line3" />
+    <line
+       x1="21.780001"
+       y1="13.47"
+       x2="15.33"
+       y2="6.6999998"
+       fill="none"
+       stroke="#000000"
+       stroke-linecap="round"
+       stroke-miterlimit="10"
+       stroke-width="3"
+       id="line4" />
+    <line
+       x1="33.93"
+       y1="46.799999"
+       x2="33.93"
+       y2="52.139999"
+       fill="none"
+       stroke="#000000"
+       stroke-linecap="round"
+       stroke-miterlimit="10"
+       stroke-width="3"
+       id="line5" />
+    <path
+       d="M 41.12,57.3 H 26.33 a 1.14,1.14 0 0 1 -1.06,-1.57 l 2.51,-2.87 a 1.17,1.17 0 0 1 1.07,-0.72 h 9.76 a 1.15,1.15 0 0 1 1.06,0.72 l 2.52,2.87 a 1.15,1.15 0 0 1 -1.07,1.57 z"
+       fill="none"
+       stroke="#000000"
+       stroke-linecap="round"
+       stroke-miterlimit="10"
+       stroke-width="3"
+       id="path5" />
+  </g>
+</svg>

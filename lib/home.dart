@@ -1,11 +1,53 @@
 part of 'main.dart';
 
-class HomePageNew extends StatelessWidget {
+
+class HomePageNew extends StatefulWidget {
   const HomePageNew({super.key});
 
   @override
+  State<HomePageNew> createState() => _HomePageNew();
+}
+class _HomePageNew extends State<HomePageNew> with WidgetsBindingObserver {
+  
+  
+  Key Svgkey = UniqueKey();
+   Brightness _brightness = Brightness.dark;
+   void resetIcon() {
+    setState(() {
+      Svgkey = UniqueKey();
+    });
+  } 
+  @override
+  void initState() {
+    Svgkey = UniqueKey();
+
+        WidgetsBinding.instance?.addObserver(this);
+
+    super.initState();
+
+  }
+  @override
+  void dispose() {
+    WidgetsBinding.instance?.removeObserver(this);
+  }
+  @override
+  void didChangePlatformBrightness() {
+    
+    
+    setState(() {
+          Svgkey = UniqueKey();
+          
+        });
+        
+ 
+
+    super.didChangePlatformBrightness();
+  }
+   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+        
+
+        return Scaffold(
       body: Container(
         alignment: Alignment.topLeft,
         margin: const EdgeInsets.only(left: 15, right: 15),
@@ -21,8 +63,6 @@ class HomePageNew extends StatelessWidget {
                 textAlign: TextAlign.left,
                 style: TextStyle(fontSize: 20),
               ),
-              // Removed SizedBox for extra space here
-              // Horizontal Scroll View with recommended topics
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
@@ -46,7 +86,7 @@ class HomePageNew extends StatelessWidget {
                 "Subjects",
                 textAlign: TextAlign.left,
                 style: TextStyle(
-                    color: Theme.of(context).textTheme.bodySmall!.color,
+                    
                     fontSize: 20),
               ),
               SizedBox(
@@ -75,9 +115,12 @@ class HomePageNew extends StatelessWidget {
                           padding: EdgeInsets.only(left: 10),
                           child: Column(
                             children: [
-                              Container(
+                                Stack(children: [
+
+                                               Container(
                                 width:
-                                    (MediaQuery.of(context).size.width - 60) /
+                                    
+                                    (MediaQuery.of(context).size.width -60 ) /
                                         3,
                                 height:
                                     (MediaQuery.of(context).size.width - 60) /
@@ -86,22 +129,28 @@ class HomePageNew extends StatelessWidget {
                                   shape: BoxShape.circle,
                                   boxShadow: [
                                     BoxShadow(
-                                      color: mauve,
-                                      blurRadius: 8.0,
+                                      color:ThemeProvider().themeMode == ThemeMode.dark ? mauveDark : mauveLight ,
+                                      blurRadius: 8.5,
                                     ),
                                   ],
                                 ),
                                 child: SvgPicture.asset(
-                                  'asset/${subjectsList[i]}.svg', // Make sure the path is correct
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Text(
+                                
+                                  Theme.of(context).brightness == Brightness.dark ?  'asset/${subjectsList[i]}.svg' :  'asset/${subjectsList[i]}_light.svg',
+                                  fit: BoxFit.cover,key:Svgkey ,
+                                )),
+                               SleekCircularSlider(appearance: CircularSliderAppearance(customColors: CustomSliderColors(progressBarColor: Theme.of(context).brightness == Brightness.light ? peachLight :peachDark ,shadowColor: baseDark) ,customWidths: CustomSliderWidths(progressBarWidth: 5,handlerSize: 0,),size: (MediaQuery.of(context).size.width -60) /3),min: 0,max: 100,initialValue: 50 ,innerWidget: (double value){var roundvalue = value.toStringAsFixed(1); return Column(children: [SizedBox(height:(MediaQuery.of(context).size.width -110) /3),Text('$roundvalue %' ,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold))],);},),
+
+                  ],),                             
+
+
+                          
+                                                            Text(
                                 subjectsList[i],
                                 style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
-                                    color: text),
+                                    ),
                               )
                             ],
                           )),

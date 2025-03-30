@@ -15,6 +15,8 @@ dependencies:
   flutter_svg_provider: ^1.0.7
   flutter_svg: ^2.0.17
   pie_chart: ^5.4.0
+  sleek_circular_slider: ^2.0.1
+  provider: ^6.1.4
 
 dev_dependencies:
   flutter_test:
@@ -25,11 +27,5 @@ flutter:
   uses-material-design: true
 
   assets:
-    - asset/Maths.svg  # Corrected the path here from `asset/Maths.svg` to `assets/Maths.svg`
-    - asset/Biology.svg
-    - asset/Physics.svg
-    - asset/Chemistry.svg
-    - asset/Geography.svg
-    - asset/History.svg
-    - asset/English.svg
+    - asset/
     

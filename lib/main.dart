@@ -6,14 +6,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:qremo/themeDectector.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:provider/provider.dart';
-
+import 'dart:io';
+import 'dart:ui';
 part 'colors.dart';
 part 'profile.dart';
 part 'notes.dart';
 part 'quiz.dart';
 part 'home.dart';
 part 'subject.dart';
- 
+part 'Start_practice.dart'; 
 
 List<String> subjectsList = [
   "Maths",

@@ -73,7 +73,7 @@ class _SubjectMenuState extends State<SubjectMenu> {
                           shrinkWrap: true,
                           itemBuilder: (BuildContext context, int index) {
                             return SingleChildScrollView(
-                  child:   Container(
+                  child:   GestureDetector(child: Container(
                     
                                 alignment: Alignment.bottomCenter,
                                 margin: EdgeInsets.only(top: 10),
@@ -128,7 +128,16 @@ class _SubjectMenuState extends State<SubjectMenu> {
                                         )
                                       ],
                                     )
-                                  ])));
+                                  ])),onTap: () {
+                        
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PracticePage(),
+                        )
+                        );// Change subject number based on the loop
+                      },
+));
                                 
                            })
                 ])))));

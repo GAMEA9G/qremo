@@ -11,39 +11,7 @@ class _HomePageNew extends State<HomePageNew> with WidgetsBindingObserver {
   
   
   Key Svgkey = UniqueKey();
-   Brightness _brightness = Brightness.dark;
-   void resetIcon() {
-    setState(() {
-      Svgkey = UniqueKey();
-    });
-  } 
-  @override
-  void initState() {
-    Svgkey = UniqueKey();
-
-        WidgetsBinding.instance?.addObserver(this);
-
-    super.initState();
-
-  }
-  @override
-  void dispose() {
-    WidgetsBinding.instance?.removeObserver(this);
-  }
-  @override
-  void didChangePlatformBrightness() {
-    
-    
-    setState(() {
-          Svgkey = UniqueKey();
-          
-        });
-        
- 
-
-    super.didChangePlatformBrightness();
-  }
-   @override
+     @override
   Widget build(BuildContext context) {
         
 

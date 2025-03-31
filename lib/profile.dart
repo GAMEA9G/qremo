@@ -19,8 +19,7 @@ class Profile extends StatelessWidget {
     ];
     return Container(
         padding: EdgeInsets.symmetric(horizontal: 16),
-        color: Theme.of(context).colorScheme.surface,
-        child: Scaffold(
+               child: Scaffold(
             body: SingleChildScrollView(
           child: Column(
             children: [
@@ -32,8 +31,11 @@ class Profile extends StatelessWidget {
                       0.40, // Set height relative to width
 
                   decoration: BoxDecoration(
-                      color: Color.fromRGBO(111, 56, 242, 1),
+                      color: Theme.of(context).brightness == Brightness.dark ? baseDark :baseLight,
+
+                      border: Border.all(color: Theme.of(context).brightness ==Brightness.light ? tealLight : tealDark,width: 2,),
                       borderRadius: BorderRadius.circular(20)),
+                      
                   child: Center(
                     child: Row(children: [
                       Padding(
@@ -56,16 +58,12 @@ class Profile extends StatelessWidget {
                           child: Column(
                             children: [
                               Text(
-                                "User Name",
-                                style: TextStyle(
-                                    color: Color.fromRGBO(2, 255, 31, 1),
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700),
-                              ),
+                                "User Name",style: TextStyle(fontWeight: FontWeight.bold),
+                                                              ),
                               Text(
                                 "Sylabuss: SSLC",
                                 style: TextStyle(
-                                    color: Colors.black87,
+                                    
                                     fontWeight: FontWeight.bold),
                               ),
                               Padding(
@@ -99,7 +97,9 @@ class Profile extends StatelessWidget {
                     Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Color.fromRGBO(30, 30, 46, 1),
+                 border: Border.all(color: Theme.of(context).brightness ==Brightness.light ? tealLight : tealDark,width: 2,),
+
+                          color: Theme.of(context).brightness == Brightness.dark ? baseDark :baseLight,
                         ),
                         height: MediaQuery.of(context).size.height * 0.35,
                         width: 400,
@@ -112,8 +112,8 @@ class Profile extends StatelessWidget {
                               "Statistics",
                               style: TextStyle(
                                   fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color.fromRGBO(242, 149, 56, 1)),
+                                  fontWeight: FontWeight.bold,),
+                                  
                               textAlign: TextAlign.center,
                             ),
                             Padding(

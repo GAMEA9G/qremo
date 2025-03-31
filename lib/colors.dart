@@ -32,6 +32,7 @@ Color lavenderDark =  Color.fromRGBO(180, 190, 254, 1);
 Color textDark =  Color.fromRGBO(205, 214, 244, 1) ;
 Color textLight = Color.fromRGBO(76, 79, 105, 1);
 Color baseDark =  Color.fromRGBO(30, 30, 46, 1);
+Color baseLight = Color.fromRGBO(239, 241, 245, 1);
 Color mantleDark =  Color.fromRGBO(24,24, 27, 1) ;
 Color crustDark =  Color.fromRGBO(17, 17, 27, 1) ;
 Color crustLight = Color.fromRGBO(220, 224, 232, 1);

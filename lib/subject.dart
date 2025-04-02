@@ -73,20 +73,13 @@ class _SubjectMenuState extends State<SubjectMenu> {
                           shrinkWrap: true,
                           itemBuilder: (BuildContext context, int index) {
                             return SingleChildScrollView(
-                  child:   GestureDetector(child: Container(
+                  child:   GestureDetector(child: ThemedBox(
                     
-                                alignment: Alignment.bottomCenter,
-                                margin: EdgeInsets.only(top: 10),
-                                width: 360,
+                                                               margin: EdgeInsets.only(top: 10),
+                               
                                  
-                                height: 150,
-                                decoration: BoxDecoration(
-                                                         color: Theme.of(context).colorScheme.surfaceContainer,
-                        border:
-                                      Border.all(color: Theme.of(context).brightness ==Brightness.light ? tealLight : tealDark, width: 2),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Wrap(
+                                height: 180,
+                                                               child: Wrap(
                                   runSpacing: 5,
                                   children: [
                                     Row(
@@ -103,7 +96,7 @@ class _SubjectMenuState extends State<SubjectMenu> {
                                               height: 89,
                                               decoration: BoxDecoration(
                                                                                                    border: Border.all(
-                                                                                                           width: 2, color: Theme.of(context).brightness ==Brightness.light ? tealLight : tealDark,)
+                                                                                                           width: 2, color: Theme.of(context).brightness ==Brightness.light ? lavenderLight : lavenderDark,)
                                     ,
                                                                                      borderRadius:
                                                       BorderRadius.circular(
@@ -133,7 +126,7 @@ class _SubjectMenuState extends State<SubjectMenu> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => PracticePage(),
+                              builder: (context) => StartPractice(),
                         )
                         );// Change subject number based on the loop
                       },

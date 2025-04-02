@@ -23,19 +23,12 @@ class Profile extends StatelessWidget {
             body: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                  width: MediaQuery.of(context)
-                      .size
-                      .width, // Use full screen width
+              ThemedBox(
+                  // Use full screen width
                   height: MediaQuery.of(context).size.width *
                       0.40, // Set height relative to width
 
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).brightness == Brightness.dark ? baseDark :baseLight,
-
-                      border: Border.all(color: Theme.of(context).brightness ==Brightness.light ? tealLight : tealDark,width: 2,),
-                      borderRadius: BorderRadius.circular(20)),
-                      
+                                        
                   child: Center(
                     child: Row(children: [
                       Padding(
@@ -79,10 +72,9 @@ class Profile extends StatelessWidget {
                                   label: const Text('Edit details'),
                                   style: TextButton.styleFrom(
                                       foregroundColor: Colors.white,
-                                      backgroundColor:
-                                          Color.fromRGBO(24, 19, 84, 1)),
+                                      backgroundColor: Theme.of(context).brightness == Brightness.dark ? surface0Dark: surface0Light                                          ,
                                 ),
-                              )
+                              ))
                             ],
                           )),
                     ]),
@@ -94,16 +86,9 @@ class Profile extends StatelessWidget {
                 child: Stack(
                   children: [
                     // Container with the background and content
-                    Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                 border: Border.all(color: Theme.of(context).brightness ==Brightness.light ? tealLight : tealDark,width: 2,),
-
-                          color: Theme.of(context).brightness == Brightness.dark ? baseDark :baseLight,
-                        ),
-                        height: MediaQuery.of(context).size.height * 0.35,
-                        width: 400,
-                        child: Column(
+                    ThemedBox(
+                                                height: MediaQuery.of(context).size.height * 0.35,
+                                               child: Column(
                           children: [
                             SizedBox(
                               height: 15.0,

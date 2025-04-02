@@ -17,6 +17,7 @@ dependencies:
   pie_chart: ^5.4.0
   sleek_circular_slider: ^2.0.1
   provider: ^6.1.4
+  image_size_getter_http_input: ^2.1.0
 
 dev_dependencies:
   flutter_test:

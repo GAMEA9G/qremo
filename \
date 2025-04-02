@@ -1,0 +1,48 @@
+import 'package:flutter/material.dart';
+part of 'main.dart';
+
+
+class StartPractice extends StatefulWidget {
+  const StartPractice({super.key});
+
+  @override
+  State<StartPractice> createState() => _StartPracticeState();
+}
+
+class _StartPracticeState extends State<StartPractice> with WidgetsBindingObserver {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Chapter Name"),),
+      body: Container(alignment: Alignment.topLeft,
+        margin: const EdgeInsets.only(left: 15, right: 15),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.surface,
+          borderRadius: BorderRadius.circular(20.0),
+        ),child: Column(spacing: 10,children: [
+          Container( child: FittedBox(child: ClipRRect(borderRadius: BorderRadius.circular(40),child: Image.network("https://cdn.statically.io/img/1.bp.blogspot.com/w=640,h=427,f=auto/-C8q3eA8oxlw/YSSlYakMmrI/AAAAAAAABeU/HHDlI_ixOIgZ658HpJ4ztslnxy9umBmqwCLcBGAsYHQ/s16000-rw/BIO%2BCHAP1.webp", )),fit: BoxFit.fill,),decoration: BoxDecoration(borderRadius:BorderRadius.circular(20),border: Border.all(width: 2,color: ThemeProvider().themeMode == ThemeMode.dark ? tealDark : tealLight)),width: MediaQuery.of(context).size.width ,height: MediaQuery.of(context).size.width * 0.5),
+          Text("Chapter Name: Chapter_name",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
+          Text("Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a pharetra arcu. Nam placerat sit amet turpis ornare pellentesque. Integer nisl risus, efficitur accumsan turpis nec, lacinia mollis dolor. Curabitur bibendum consectetur lectus, eget euismod nunc porta non. In luctus lectus nec sollicitudin maximus. Quisque rutrum metus dolor, "),
+         Align(alignment: Alignment.bottomCenter,child:  Row(spacing: 10,mainAxisAlignment:MainAxisAlignment.center, children: [
+          FloatingActionButton(onPressed: (){
+
+            },child: const Icon(Icons.edit),backgroundColor: ThemeProvider().themeMode != ThemeMode.dark ? sappireDark :sappireLight,foregroundColor: Theme.of(context).colorScheme.onSurface
+
+            )
+        ,FloatingActionButton.extended(onPressed: (){
+          Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Practice(
+                                    
+                                  )),
+                        );
+            },label: Text("Start Practice", style: TextStyle(fontSize: 25),),backgroundColor: ThemeProvider().themeMode != ThemeMode.dark ? sappireDark :sappireLight,foregroundColor: Theme.of(context).colorScheme.onSurface)
+
+
+          ] ),) ],),
+)
+,);
+  }
+}
+

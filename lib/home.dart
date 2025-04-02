@@ -10,7 +10,7 @@ class HomePageNew extends StatefulWidget {
 class _HomePageNew extends State<HomePageNew> with WidgetsBindingObserver {
   
   
-  Key Svgkey = UniqueKey();
+
      @override
   Widget build(BuildContext context) {
         
@@ -105,7 +105,7 @@ class _HomePageNew extends State<HomePageNew> with WidgetsBindingObserver {
                                 child: SvgPicture.asset(
                                 
                                   Theme.of(context).brightness == Brightness.dark ?  'asset/${subjectsList[i]}.svg' :  'asset/${subjectsList[i]}_light.svg',
-                                  fit: BoxFit.cover,key:Svgkey ,
+                                  fit: BoxFit.cover ,
                                 )),
                                SleekCircularSlider(appearance: CircularSliderAppearance(customColors: CustomSliderColors(progressBarColor: Theme.of(context).brightness == Brightness.light ? peachLight :peachDark ,shadowColor: baseDark) ,customWidths: CustomSliderWidths(progressBarWidth: 5,handlerSize: 0,),size: (MediaQuery.of(context).size.width -60) /3),min: 0,max: 100,initialValue: 50 ,innerWidget: (double value){var roundvalue = value.toStringAsFixed(1); return Column(children: [SizedBox(height:(MediaQuery.of(context).size.width -110) /3),Text('$roundvalue %' ,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold))],);},),
 

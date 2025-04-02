@@ -29,11 +29,23 @@ Color sappireLight = Color.fromRGBO(32, 159, 181, 1);
 Color blueDark = Color.fromRGBO(137, 180, 250, 1);
 Color blueLight = Color.fromRGBO(30, 102, 245, 1);
 Color lavenderDark =  Color.fromRGBO(180, 190, 254, 1);
+Color lavenderLight =  Color.fromRGBO(114, 135, 253, 1);
+
+Color surface2Light = Color.fromRGBO(172, 176, 196,1 );
+Color surface1Light = Color.fromRGBO(188, 192, 204,1 );
+
+Color surface0Light = Color.fromRGBO(204, 208, 218,1 );
+
+Color surface2Dark = Color.fromRGBO(88, 91, 112,1 );
+
+Color surface1Dark = Color.fromRGBO(69, 71, 90,1 );
+Color surface0Dark = Color.fromRGBO(49, 50, 68, 1);
 Color textDark =  Color.fromRGBO(205, 214, 244, 1) ;
 Color textLight = Color.fromRGBO(76, 79, 105, 1);
 Color baseDark =  Color.fromRGBO(30, 30, 46, 1);
 Color baseLight = Color.fromRGBO(239, 241, 245, 1);
 Color mantleDark =  Color.fromRGBO(24,24, 27, 1) ;
+Color mantleLight = Color.fromRGBO(230, 233, 239, 1);
 Color crustDark =  Color.fromRGBO(17, 17, 27, 1) ;
 Color crustLight = Color.fromRGBO(220, 224, 232, 1);
 

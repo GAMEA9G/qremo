@@ -24,8 +24,8 @@ class NotesPage extends StatelessWidget {
           itemBuilder: (context, i) {
             return ListTile(
               leading: SvgPicture.asset(
-                'asset/${subjectsList[i]}.svg',
-                width: 40,
+                Theme.of(context).brightness == Brightness.dark ?  'asset/${subjectsList[i]}.svg' :  'asset/${subjectsList[i]}_light.svg',
+                                  fit: BoxFit.cover,                width: 40,
                 height: 40,
               ),
               title: Text(subjectsList[i]),

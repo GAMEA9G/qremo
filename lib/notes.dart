@@ -29,6 +29,13 @@ class NotesPage extends StatelessWidget {
                 height: 40,
               ),
               title: Text(subjectsList[i]),
+              onTap: (){
+               Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => NoteMenu( subjectName: subjectsList[i],)),
+                        ); 
+              },
             );
           },
         ),

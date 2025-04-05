@@ -6,10 +6,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:qremo/themeDectector.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:provider/provider.dart';
-
+import 'package:webview_flutter/webview_flutter.dart';
 import 'package:image_size_getter/image_size_getter.dart';
 import 'package:image_size_getter_http_input/image_size_getter_http_input.dart';
-
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'dart:io';
 import 'dart:ui';
 part 'colors.dart';
@@ -21,7 +21,9 @@ part 'subject.dart';
 part 'Start_practice.dart'; 
 part 'practice.dart';
 part 'edit.dart';
-part 'custom-wigets.dart';
+part 'custom-wigets.dart';  
+part 'notemenu.dart';
+part 'html.dart';
 List<String> subjectsList = [
   "Maths",
   "Biology",

@@ -2,10 +2,8 @@ part of 'main.dart';
 
 Color rosewaterDark= Color.fromRGBO(245, 224, 220, 1);
 Color rosewaterLight =  Color.fromRGBO(220, 138, 120, 1);
-
 Color flamingoDark =  Color.fromRGBO(242, 205, 205, 1);
 Color flamingoLight =  Color.fromRGBO(221, 120, 120, 1);
-
 Color pinkDark =  Color.fromRGBO(245,194,231, 1);
 Color pinkLight =  Color.fromRGBO(234, 118, 203, 1);
 Color mauveDark =  Color.fromRGBO(203,166,247,1);
@@ -16,7 +14,6 @@ Color marooonDark =  Color.fromRGBO(235,160,175,1);
 Color marooonLight =  Color.fromRGBO(230, 69, 83, 1);
 Color peachDark =  Color.fromRGBO(250,179, 135, 1) ;
 Color peachLight =  Color.fromRGBO(254, 100, 11, 1);
-
 Color yellowDark =Color.fromRGBO(249,226,213,1);
 Color yellowLight = Color.fromRGBO(223, 142, 29, 1);
 Color greenDark =  Color.fromRGBO(166,227,161,1);
@@ -30,14 +27,10 @@ Color blueDark = Color.fromRGBO(137, 180, 250, 1);
 Color blueLight = Color.fromRGBO(30, 102, 245, 1);
 Color lavenderDark =  Color.fromRGBO(180, 190, 254, 1);
 Color lavenderLight =  Color.fromRGBO(114, 135, 253, 1);
-
 Color surface2Light = Color.fromRGBO(172, 176, 196,1 );
 Color surface1Light = Color.fromRGBO(188, 192, 204,1 );
-
 Color surface0Light = Color.fromRGBO(204, 208, 218,1 );
-
 Color surface2Dark = Color.fromRGBO(88, 91, 112,1 );
-
 Color surface1Dark = Color.fromRGBO(69, 71, 90,1 );
 Color surface0Dark = Color.fromRGBO(49, 50, 68, 1);
 Color textDark =  Color.fromRGBO(205, 214, 244, 1) ;
@@ -48,4 +41,3 @@ Color mantleDark =  Color.fromRGBO(24,24, 27, 1) ;
 Color mantleLight = Color.fromRGBO(230, 233, 239, 1);
 Color crustDark =  Color.fromRGBO(17, 17, 27, 1) ;
 Color crustLight = Color.fromRGBO(220, 224, 232, 1);
-

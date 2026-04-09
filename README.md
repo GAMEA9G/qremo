@@ -4,9 +4,9 @@
 The goal of this app is to make tedious task of studying and remembering for studying easy and enjoyable for students by teaching concepts and provide questions to make the concepts and their applications more clear and precise 
 
 ## How exactly
-Firstly student/user shall click the subject and chapter they want to study .We shall provide the contents of the chapter by topics in a page . it shall include things like explanation of the concept in text form with or without an example and a video explaining it .Its not necessary to watch the video .After the student learned the concept . we shall give simple problems to solve it doesn't require you to think hard and and doesn't require a paper and a pencil to do.Then we shall show next concept then the cycle repeats after student finished the chapter's entire topics this is called tutorial mode you can turn of it if you want. we will show questions on the entire questions 
+Firstly student/user shall click the subject and chapter they want to study .We shall provide the contents of the chapter by topics in a page . it shall include things like explanation of the concept in text form with or without an example and a video explaining it .Its not necessary to watch the video .After the student learned the concept . we shall give simple problems to solve it doesn't require you to think hard and and doesn't require a paper and a pencil to do.Then we shall show next concept then the cycle repeats after student finished the chapter's entire topics this is called tutorial mode you can turn of it if you want. we will show questions on the entire questions , and it includes simulations of conceps and after that we increase the level the level questions will become increased to beginner the questions will be shown in slitly harder and using a powerfull algorithem to make it addicting and further increase the level and so on 
+the levels are beginner , moderate, intermediate hard, extreame, god mod
 
-apart from tutorial mode we have many modes like Easy mode,Medium mode,Hard mode,
 
 ## Additional features
 ### Notes

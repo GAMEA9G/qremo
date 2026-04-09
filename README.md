@@ -8,6 +8,9 @@ Firstly student/user shall click the subject and chapter they want to study .We 
 the levels are beginner , moderate, intermediate hard, extreame, god mod
 
 
+
+ and it incudes advancement , badges , to encorage students, with performace graphs etc
+
 ## Additional features
 ### Notes
 Notes contain chapter specific notes made by lectures/teachers , Previous year question papers and their answer keys and chapter specific previous year question papers

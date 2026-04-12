@@ -23,7 +23,9 @@ Announcement notify about exam timetable and important news to students and noti
 ### Tests
 Tests as the name implies are tests which tests students performance
 
-
+## Acknowledgement
+Edwin for the ui ux design 
+mallusrgreat for the idea develpment
 # Still under Development
 # Contributors Are Welcome
 # Images

@@ -21,7 +21,7 @@ class _StartPracticeState extends State<StartPractice> with WidgetsBindingObserv
           borderRadius: BorderRadius.circular(20.0),
         ),child: Column(spacing: 10,children: [
           Expanded(child: ListView(shrinkWrap: true,children: [
-           Container( decoration: BoxDecoration(borderRadius:BorderRadius.circular(20),border: Border.all(width: 3,color: ThemeProvider().themeMode == ThemeMode.dark ? lavenderDark : lavenderLight),image: DecorationImage(fit: BoxFit.fitWidth,alignment: FractionalOffset.topCenter,image:NetworkImage("https://static.pw.live/5eb393ee95fab7468a79d189/GLOBAL_CMS_BLOGS/c8a387e6-58a8-4eb2-a6f3-bd5ebbb5ded9.jpg")
+           Container( decoration: BoxDecoration(borderRadius:BorderRadius.circular(20),border: Border.all(width: 3,color: Theme.of(context).brightness == Brightness.dark ? lavenderDark : lavenderLight),image: DecorationImage(fit: BoxFit.fitWidth,alignment: FractionalOffset.topCenter,image:NetworkImage("https://static.pw.live/5eb393ee95fab7468a79d189/GLOBAL_CMS_BLOGS/c8a387e6-58a8-4eb2-a6f3-bd5ebbb5ded9.jpg")
 
             )),width: 360 ,height: 180),
             SizedBox(height: 10),

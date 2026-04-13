@@ -42,28 +42,28 @@ class _SubjectMenuState extends State<SubjectMenu> {
                     child: Column(children: [
                   widget.searchButton
                       ? TextFormField(
-                          cursorColor: ThemeProvider().themeMode == ThemeMode.dark ? mauveDark : mauveLight,
+                          cursorColor: Theme.of(context).brightness== Brightness.dark ? mauveDark : mauveLight,
                           decoration: InputDecoration(
                             labelText: 'Search ${widget.nameOfSubject}',
                             border: OutlineInputBorder(
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(20)),
                               borderSide:
-                                  BorderSide(color: ThemeProvider().themeMode == ThemeMode.dark ? mauveDark : mauveLight,
+                                  BorderSide(color: Theme.of(context).brightness== Brightness.dark ? mauveDark : mauveLight,
  width: 2),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(20)),
                               borderSide:
-                                  BorderSide(color: ThemeProvider().themeMode == ThemeMode.dark ? mauveDark : mauveLight,
+                                  BorderSide(color: Theme.of(context).brightness== Brightness.dark ? mauveDark : mauveLight,
  width: 2),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(20)),
                               borderSide:
-                                  BorderSide(color: ThemeProvider().themeMode == ThemeMode.dark ? mauveDark : mauveLight,
+                                  BorderSide(color: Theme.of(context).brightness== Brightness.dark ? mauveDark : mauveLight,
  width: 2),
                             ),
                           )

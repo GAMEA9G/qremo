@@ -7,7 +7,7 @@ class Edit extends StatefulWidget {
 }
 
 class _EditState extends State<Edit> {
-  Color tile_color =ThemeProvider().themeMode == ThemeMode.dark? mantleDark:mantleLight; 
+  late Color tile_color ;
 bool isSelected =false ;
 
   @override
@@ -17,7 +17,7 @@ bool isSelected =false ;
       appBar: AppBar(title: Text("Select Topics")),
       floatingActionButton: isSelected ? FloatingActionButton.extended(onPressed: (){}, label:Text( "Start")):null,
       body: SingleChildScrollView(physics:ScrollPhysics(),child: ListView.builder(shrinkWrap: true,physics: NeverScrollableScrollPhysics(),itemCount: 20,itemBuilder: (context,i){
-      return Padding(padding:EdgeInsets.only(top: 10,left: 10,right: 10),child:  ListTile(selected:isSelected ,title: Text("Topic one",textAlign: TextAlign.center,),tileColor:ThemeProvider().themeMode == ThemeMode.dark? mantleDark:mantleLight  ,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20),side: BorderSide(color: Theme.of(context).brightness == Brightness.dark ? lavenderDark : lavenderLight)),onLongPress:toggleSelection ,), );
+      return Padding(padding:EdgeInsets.only(top: 10,left: 10,right: 10),child:  ListTile(selected:isSelected ,title: Text("Topic one",textAlign: TextAlign.center,),tileColor:Theme.of(context).brightness== Brightness.dark? mantleDark:mantleLight  ,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20),side: BorderSide(color: Theme.of(context).brightness == Brightness.dark ? lavenderDark : lavenderLight)),onLongPress:toggleSelection ,), );
 
       }),)
     );
@@ -26,10 +26,10 @@ bool isSelected =false ;
 void toggleSelection() {
     setState(() {
       if (isSelected) {
-        tile_color=ThemeProvider().themeMode == ThemeMode.dark? mantleDark:mantleLight; 
+        tile_color=Theme.of(context).brightness== Brightness.dark? mantleDark:mantleLight; 
         isSelected = false;
       } else {
-       tile_color=ThemeProvider().themeMode == ThemeMode.dark? surface1Dark:surface1Light; 
+       tile_color=Theme.of(context).brightness== Brightness.dark? surface1Dark:surface1Light; 
         isSelected = true;
       }
     });

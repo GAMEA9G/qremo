@@ -21,7 +21,7 @@ class Practice extends StatelessWidget {
                 children: [
                 Row(children: [
                 Padding(padding: EdgeInsets.only(left: MediaQuery.of(context).size.width /4,right: MediaQuery.of(context).size.width /4,top: 5),child: SizedBox(height: 15,child: ListView.builder(scrollDirection: Axis.horizontal,itemCount: 5,shrinkWrap: true,itemBuilder: (BuildContext context , int index) {
-                  return Icon(Icons.favorite_sharp,color: ThemeProvider().themeMode != ThemeMode.dark ? redDark:redLight,);
+                  return Icon(Icons.favorite_sharp,color: Theme.of(context).brightness== Brightness.dark ? redDark:redLight,);
 
                 }),
 ),

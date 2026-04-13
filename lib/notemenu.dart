@@ -7,7 +7,7 @@ class NoteMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      return Scaffold(appBar: AppBar(title: Text("${subjectName} Notes"),),
+      return Scaffold(appBar: AppBar(title: Text("$subjectName Notes"),),
         body: SingleChildScrollView(
         physics: ScrollPhysics(),
         child: ListView.builder(shrinkWrap: true,physics: NeverScrollableScrollPhysics(),itemCount: 20,itemBuilder: (context,i){

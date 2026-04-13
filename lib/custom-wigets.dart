@@ -20,7 +20,7 @@ class ThemedBox extends StatelessWidget {
 
 
 
-    return Container(width: width,height: height,decoration: BoxDecoration(color:boxColor, border: Border.all(color:borderColor ,width: 2), borderRadius: BorderRadius.circular(20)),child: child,margin: margin,); }
+    return Container(width: width,height: height,decoration: BoxDecoration(color:boxColor, border: Border.all(color:borderColor ,width: 0.5), borderRadius: BorderRadius.circular(20)),child: child,margin: margin,); }
 
 }  
 

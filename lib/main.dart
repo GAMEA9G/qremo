@@ -1,17 +1,21 @@
-// Mai  entry point for the Qremo app
 import 'package:pie_chart/pie_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+
+import 'package:dio/dio.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:qremo/themeDectector.dart';
+import 'package:qremo/variables.dart';
+import "dart:math";
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:image_size_getter/image_size_getter.dart';
 import 'package:image_size_getter_http_input/image_size_getter_http_input.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'dart:io';
 import 'dart:ui';
+import 'variables.dart';
 part 'colors.dart';
 part 'profile.dart';
 part 'notes.dart';
@@ -33,36 +37,30 @@ List<String> subjectsList = [
   "English",
   "History"
 ];
-void main() => runApp(
-  ChangeNotifierProvider(create: (_)=> ThemeProvider(),
-  child: const QremoApp(),
-  )
-);
+void main() => runApp(QremoApp());
+
 
 
 class QremoApp extends StatelessWidget {
-  static ThemeMode _themeMode = ThemeMode.system;
+  static final ThemeMode _themeMode = ThemeMode.system;
   const QremoApp({super.key});
   
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeProvider>(
-  builder: (context,themeprovider,child){
-        return   MaterialApp(
+    return MaterialApp(
      
       title: 'Qremo',
       
        
       darkTheme: ThemeData.dark(),
-      themeMode: ThemeProvider().themeMode,
+      themeMode: ThemeMode.system,
       home: const HomePage(),
       debugShowCheckedModeBanner: false,
     );
 
       }
-);
+
   }
-}
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -101,8 +99,8 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) => setState(() => _currentIndex = index),
-        unselectedItemColor: ThemeProvider().themeMode == ThemeMode.dark ? rosewaterDark :rosewaterLight,
-        selectedItemColor:  ThemeProvider().themeMode == ThemeMode.dark ? pinkDark : pinkLight,
+        unselectedItemColor: Theme.of(context).brightness== Brightness.dark ? rosewaterDark :rosewaterLight,
+        selectedItemColor:  Theme.of(context).brightness== Brightness.dark ? pinkDark : pinkLight,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_filled),
@@ -124,13 +122,14 @@ class _HomePageState extends State<HomePage> {
 class RecommendedTopicCard extends StatelessWidget {
   final String title;
   final String description;
-  final String imageUrl;
+
+
 
   const RecommendedTopicCard({
     super.key,
     required this.title,
     required this.description,
-    required this.imageUrl,
+
   });
 
   @override
@@ -153,12 +152,7 @@ class RecommendedTopicCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.network(
-                  imageUrl,
-                  width: 80,
-                  height: 80,
-                  fit: BoxFit.cover,
-                ),
+                
                 SizedBox(height: 8.0),
                 Text(
                   title,

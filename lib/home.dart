@@ -7,15 +7,16 @@ class HomePageNew extends StatefulWidget {
   @override
   State<HomePageNew> createState() => _HomePageNew();
 }
-class _HomePageNew extends State<HomePageNew> with WidgetsBindingObserver {
+class _HomePageNew extends State<HomePageNew> {
   
-  
+
+
 
      @override
   Widget build(BuildContext context) {
-        
-
-        return Scaffold(
+      final SharedPreferences prefs = await SharedPreferences.getInstance(); 
+      final isDarktheme =Theme.of(context).brightness == Brightness.dark ?true:false;        
+      return Scaffold(
       body: Container(
         alignment: Alignment.topLeft,
         margin: const EdgeInsets.only(left: 15, right: 15),
@@ -24,32 +25,51 @@ class _HomePageNew extends State<HomePageNew> with WidgetsBindingObserver {
           borderRadius: BorderRadius.circular(15.0),
         ),
         child: SingleChildScrollView(
+           
+
           child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Recommented",
-                textAlign: TextAlign.left,
-                style: TextStyle(fontSize: 20),
-              ),
+              Builder(builder: (context){
+                final random = Random();
+                final greetingMorningMsg = GreetingMessage().morning[random.nextInt(GreetingMessage().morning.length -1)];
+                final greetingEveningMsg = GreetingMessage().evening[random.nextInt(GreetingMessage().evening.length -1)];
+                final SharedPreferences prefs = await SharedPreferences.getInstance(); 
+                if(DateTime.now().hour < 12) {
+                  
+                  return Builder(builder: (context){
+                    
+                    if(greetingMorningMsg=="Good Morning,"){
+                      return Text(greetingMorningMsg,style:TextStyle(fontSize:25,color: isDarktheme?textDark:textLight));
+                    }
+                    else{
+
+                      return Row(children: [Text(greetingMorningMsg,style:TextStyle(fontSize:25,color: isDarktheme?textDark:textLight)),Text("- Good Morning",style:TextStyle(fontSize: 10))]);}
+                    });
+                }
+                else {
+                  
+                  return Builder(builder: (context){
+                    
+                    if(greetingEveningMsg=="Good Evening,"){
+                      return Text(greetingEveningMsg,style:TextStyle(fontSize:25,color: isDarktheme?textDark:textLight));
+                    }
+                    else{
+
+                      return Row(mainAxisAlignment:MainAxisAlignment.start,children: [Text(greetingEveningMsg,style:TextStyle(fontSize:25,color: isDarktheme?textDark:textLight)),Text("- Good Evening",style:TextStyle(fontSize: 10),)]);}
+                    });
+                
+                }}),Text(prefs.getString('UserName'),style:TextStyle(fontSize:20,color: isDarktheme?textDark:textLight)),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: List.generate(5, (index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 16.0),
-                      child: RecommendedTopicCard(
-                        title: 'Subject ${index + 1}',
-                        description: 'Description of Subject ${index + 1}',
-                        imageUrl: 'https://via.placeholder.com/150',
-                      ),
-                    );
-                  }),
+                  children:[]),
                 ),
-              ),
+              
               // Adding a SizedBox to ensure there's space between elements
 
-              SizedBox(height: 10.0),
+            
               Text(
                 "Subjects",
                 textAlign: TextAlign.left,
@@ -64,10 +84,20 @@ class _HomePageNew extends State<HomePageNew> with WidgetsBindingObserver {
                 alignment: WrapAlignment.start,
                 runSpacing: 15.0,
                 children: [
-                  for (var i = 0; i < subjectsList.length; i++)
+                
 
                     // Only include subjects for i <= 3
-                    GestureDetector(
+                    GridView.builder(
+  shrinkWrap: true,
+  physics: NeverScrollableScrollPhysics(),
+  itemCount: subjectsList.length,
+  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+    crossAxisCount: 3,
+    mainAxisSpacing: 15,
+    crossAxisSpacing: 0,
+  ),
+  itemBuilder: (context, i) {
+    return GestureDetector(
                       onTap: () {
                         print("clicked Subject ${subjectsList[i]}");
                         Navigator.push(
@@ -79,25 +109,17 @@ class _HomePageNew extends State<HomePageNew> with WidgetsBindingObserver {
                                   )),
                         ); // Change subject number based on the loop
                       },
-                      child: Padding(
-                          padding: EdgeInsets.only(left: 10),
-                          child: Column(
+                      child: Column(
                             children: [
                                 Stack(children: [
 
-                                               Container(
-                                width:
-                                    
-                                    (MediaQuery.of(context).size.width -60 ) /
-                                        3,
-                                height:
-                                    (MediaQuery.of(context).size.width - 60) /
-                                        3,
+                                               Container( width:90,height:90,
+                                
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   boxShadow: [
                                     BoxShadow(
-                                      color:ThemeProvider().themeMode == ThemeMode.dark ? mauveDark : mauveLight ,
+                                      color:Theme.of(context).brightness == Brightness.dark ? mauveDark : mauveLight ,
                                       blurRadius: 8.5,
                                     ),
                                   ],
@@ -107,8 +129,7 @@ class _HomePageNew extends State<HomePageNew> with WidgetsBindingObserver {
                                   Theme.of(context).brightness == Brightness.dark ?  'asset/${subjectsList[i]}.svg' :  'asset/${subjectsList[i]}_light.svg',
                                   fit: BoxFit.cover ,
                                 )),
-                               SleekCircularSlider(appearance: CircularSliderAppearance(customColors: CustomSliderColors(progressBarColor: Theme.of(context).brightness == Brightness.light ? peachLight :peachDark ,shadowColor: baseDark) ,customWidths: CustomSliderWidths(progressBarWidth: 5,handlerSize: 0,),size: (MediaQuery.of(context).size.width -60) /3),min: 0,max: 100,initialValue: 50 ,innerWidget: (double value){var roundvalue = value.toStringAsFixed(1); return Column(children: [SizedBox(height:(MediaQuery.of(context).size.width -110) /3),Text('$roundvalue %' ,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold))],);},),
-
+                               
                   ],),                             
 
 
@@ -116,18 +137,19 @@ class _HomePageNew extends State<HomePageNew> with WidgetsBindingObserver {
                                                             Text(
                                 subjectsList[i],
                                 style: TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 12.5,
                                     fontWeight: FontWeight.bold,
                                     ),
                               )
                             ],
-                          )),
-                    )
+                          ));
+  },
+)
                 ],
               ),
-              SizedBox(height: 18.0),
-            ],
-          ),
+              SizedBox(height: 18.0),])
+            ,
+          
         ),
       ),
     );

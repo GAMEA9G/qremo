@@ -42,8 +42,9 @@ void main() => runApp(QremoApp());
 
 
 class QremoApp extends StatelessWidget {
-  static final ThemeMode _themeMode = ThemeMode.system;
+ 
   const QremoApp({super.key});
+
   
   @override
   Widget build(BuildContext context) {
@@ -54,13 +55,61 @@ class QremoApp extends StatelessWidget {
        
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.system,
-      home: const HomePage(),
+      home: const SplashScreen(),
       debugShowCheckedModeBanner: false,
     );
 
       }
 
   }
+  class SplashScreen extends StatefulWidget {
+    const SplashScreen({super.key});
+
+    @override
+    State<SplashScreen> createState() => _SplashScreenState();
+  }
+
+  class _SplashScreenState extends State<SplashScreen> {
+    Future<String?>? token;
+
+    @override
+      void initState() {
+
+        super.initState();
+        token =getToken();
+        }
+    @override
+    Widget build(BuildContext context) {
+      return FutureBuilder(future: getToken(), builder: (context,snapshot){
+      if (snapshot.connectionState ==ConnectionState.waiting){
+        return CircularProgressIndicator();
+      }
+      if (!snapshot.hasError && snapshot.hasData){
+        if (snapshot.data!=''){
+          return HomePage();
+        }
+        else{
+          return LoginPage();
+        }
+      }
+      return Text("An Error Occured");
+      }
+      );
+
+    }
+  }
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Placeholder();  }
+}
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -119,63 +168,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-class RecommendedTopicCard extends StatelessWidget {
-  final String title;
-  final String description;
-
-
-
-  const RecommendedTopicCard({
-    super.key,
-    required this.title,
-    required this.description,
-
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 4.0,
-      margin: EdgeInsets.symmetric(vertical: 8.0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: InkWell(
-        onTap: () {
-          // Handle tap to show more details
-          print('Tapped on $title');
-        },
-        child: SizedBox(
-          width: 250.0, // Adjust width as necessary
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                
-                SizedBox(height: 8.0),
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 8.0),
-                Text(
-                  description,
-                  style: TextStyle(
-                    color: Colors.grey[600],
-                  ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-

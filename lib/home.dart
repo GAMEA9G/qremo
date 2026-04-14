@@ -8,16 +8,22 @@ class HomePageNew extends StatefulWidget {
   State<HomePageNew> createState() => _HomePageNew();
 }
 class _HomePageNew extends State<HomePageNew> {
-  
+  Future<String?>? userName;
 
-
+  @override
+    void initState() {
+      
+      super.initState();
+      
+      userName =  getUserName();
+          }
 
      @override
   Widget build(BuildContext context) {
-      final SharedPreferences prefs = await SharedPreferences.getInstance(); 
+        
       final isDarktheme =Theme.of(context).brightness == Brightness.dark ?true:false;        
       return Scaffold(
-      body: Container(
+      body:  Container(
         alignment: Alignment.topLeft,
         margin: const EdgeInsets.only(left: 15, right: 15),
         decoration: BoxDecoration(
@@ -34,7 +40,7 @@ class _HomePageNew extends State<HomePageNew> {
                 final random = Random();
                 final greetingMorningMsg = GreetingMessage().morning[random.nextInt(GreetingMessage().morning.length -1)];
                 final greetingEveningMsg = GreetingMessage().evening[random.nextInt(GreetingMessage().evening.length -1)];
-                final SharedPreferences prefs = await SharedPreferences.getInstance(); 
+                 
                 if(DateTime.now().hour < 12) {
                   
                   return Builder(builder: (context){
@@ -59,7 +65,19 @@ class _HomePageNew extends State<HomePageNew> {
                       return Row(mainAxisAlignment:MainAxisAlignment.start,children: [Text(greetingEveningMsg,style:TextStyle(fontSize:25,color: isDarktheme?textDark:textLight)),Text("- Good Evening",style:TextStyle(fontSize: 10),)]);}
                     });
                 
-                }}),Text(prefs.getString('UserName'),style:TextStyle(fontSize:20,color: isDarktheme?textDark:textLight)),
+                }}),FutureBuilder(future: userName,builder: (context,snapshot){
+                  if (snapshot.connectionState==ConnectionState.waiting){
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  if (snapshot.hasError){
+                    return Center(child:Text(snapshot.error.toString()));
+                  }
+                  if (snapshot.hasData) {
+
+
+                    return Text(snapshot.data! ,style:TextStyle(fontSize:20,color: isDarktheme?textDark:textLight));
+        }
+                  return Center(child: Text(snapshot.error.toString()));},),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
@@ -70,17 +88,7 @@ class _HomePageNew extends State<HomePageNew> {
               // Adding a SizedBox to ensure there's space between elements
 
             
-              Text(
-                "Subjects",
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                    
-                    fontSize: 20),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Wrap(
+                            Wrap(
                 alignment: WrapAlignment.start,
                 runSpacing: 15.0,
                 children: [
@@ -147,12 +155,20 @@ class _HomePageNew extends State<HomePageNew> {
 )
                 ],
               ),
-              SizedBox(height: 18.0),])
-            ,
-          
-        ),
-      ),
-    );
+              SizedBox(height: 18.0)
+              ])
+              ,)
+                      
+        
+      
+    
+    
+      )
+        
+      );
+      
+      
+      
   }
 }
 

@@ -1,6 +1,8 @@
+import 'dart:async';
+
 import 'package:pie_chart/pie_chart.dart';
 import 'package:flutter/material.dart';
-
+import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:qremo/variables.dart';
@@ -16,18 +18,21 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'dart:io';
 import 'dart:ui';
 import 'variables.dart';
+
 part 'colors.dart';
 part 'profile.dart';
 part 'notes.dart';
 part 'quiz.dart';
 part 'home.dart';
 part 'subject.dart';
-part 'Start_practice.dart'; 
+part 'Start_practice.dart';
 part 'practice.dart';
 part 'edit.dart';
-part 'custom-wigets.dart';  
+part 'custom-wigets.dart';
 part 'notemenu.dart';
 part 'html.dart';
+part 'auth.dart';
+
 List<String> subjectsList = [
   "Maths",
   "Biology",
@@ -39,65 +44,62 @@ List<String> subjectsList = [
 ];
 void main() => runApp(QremoApp());
 
-
-
 class QremoApp extends StatelessWidget {
- 
   const QremoApp({super.key});
 
-  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-     
       title: 'Qremo',
-      
-       
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.system,
       home: const SplashScreen(),
       debugShowCheckedModeBanner: false,
     );
-
-      }
-
   }
-  class SplashScreen extends StatefulWidget {
-    const SplashScreen({super.key});
+}
 
-    @override
-    State<SplashScreen> createState() => _SplashScreenState();
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  Future<String?>? email;
+  Future<String?> getUserEmail() async {
+    await Authenticate().userInfo();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('Token');
   }
 
-  class _SplashScreenState extends State<SplashScreen> {
-    Future<String?>? token;
-
-    @override
-      void initState() {
-
-        super.initState();
-        token =getToken();
-        }
-    @override
-    Widget build(BuildContext context) {
-      return FutureBuilder(future: getToken(), builder: (context,snapshot){
-      if (snapshot.connectionState ==ConnectionState.waiting){
-        return CircularProgressIndicator();
-      }
-      if (!snapshot.hasError && snapshot.hasData){
-        if (snapshot.data!=''){
-          return HomePage();
-        }
-        else{
-          return LoginPage();
-        }
-      }
-      return Text("An Error Occured");
-      }
-      );
-
-    }
+  @override
+  void initState() {
+    super.initState();
+    email = getUserEmail();
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+        future: email,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return CircularProgressIndicator();
+          }
+          if (!snapshot.hasError && snapshot.hasData) {
+            if (snapshot.data != '') {
+              return HomePage();
+            } else {
+              return LoginPage();
+            }
+          }
+          return Text("An Error Occured");
+        });
+  }
+}
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -107,9 +109,31 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loginToHompage();
+  }
+
+  Future<void> loginToHompage() async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      bool success = await Authenticate().signIn();
+      if (success != false) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (_) => const HomePage()),
+          (route) => false,
+        );
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Placeholder();  }
+    return Container(color: Theme.of(context).colorScheme.surface);
+  }
 }
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -148,8 +172,12 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) => setState(() => _currentIndex = index),
-        unselectedItemColor: Theme.of(context).brightness== Brightness.dark ? rosewaterDark :rosewaterLight,
-        selectedItemColor:  Theme.of(context).brightness== Brightness.dark ? pinkDark : pinkLight,
+        unselectedItemColor: Theme.of(context).brightness == Brightness.dark
+            ? rosewaterDark
+            : rosewaterLight,
+        selectedItemColor: Theme.of(context).brightness == Brightness.dark
+            ? pinkDark
+            : pinkLight,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_filled),

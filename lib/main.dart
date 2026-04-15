@@ -71,7 +71,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<String?> getUserEmail() async {
     await Authenticate().userInfo();
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('Token');
+    return prefs.getString('email');
   }
 
   @override

@@ -71,7 +71,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<String?> getUserEmail() async {
     await Authenticate().userInfo();
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('email');
+    return prefs.getString('UserEmail');
   }
 
   @override
@@ -89,7 +89,7 @@ class _SplashScreenState extends State<SplashScreen> {
             return CircularProgressIndicator();
           }
           if (!snapshot.hasError && snapshot.hasData) {
-            if (snapshot.data != '') {
+            if (snapshot.data != 'alex@gmail.com') {
               return HomePage();
             } else {
               return LoginPage();

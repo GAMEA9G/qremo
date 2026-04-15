@@ -51,6 +51,8 @@ class Authenticate {
 
   Future<void> userInfo() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    await prefs.setString('UserEmail', 'alex@gmail.com');
   }
 }// Send the ID token to your backend
 

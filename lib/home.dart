@@ -10,7 +10,6 @@ class HomePageNew extends StatefulWidget {
 class _HomePageNew extends State<HomePageNew> {
   Future<String?>? userName;
   Future<String?> getUserName() async {
-    await Authenticate().userInfo();
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('UserName');
   }

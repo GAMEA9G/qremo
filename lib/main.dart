@@ -67,29 +67,28 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  Future<String?>? email;
-  Future<String?> getUserEmail() async {
-    await Authenticate().userInfo();
+  Future<bool?>? haslogined;
+  Future<bool?>? hasLogined() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('UserEmail');
+    return prefs.getBool('hasLogined');
   }
 
   @override
   void initState() {
     super.initState();
-    email = getUserEmail();
+    haslogined = hasLogined();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: email,
+        future: haslogined,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return CircularProgressIndicator();
           }
           if (!snapshot.hasError && snapshot.hasData) {
-            if (snapshot.data != 'alex@gmail.com') {
+            if (snapshot.data == true) {
               return HomePage();
             } else {
               return LoginPage();

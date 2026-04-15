@@ -41,6 +41,7 @@ class Authenticate {
 
       await prefs.setString('UserName', body["newUser"]["name"]);
       await prefs.setString('UserEmail', body["newUser"]["email"]);
+      await prefs.setBool('hasLogined', true);
 
       Future.delayed(Duration(milliseconds: 500));
       return true;
@@ -52,7 +53,10 @@ class Authenticate {
   Future<void> userInfo() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    await prefs.setString('UserEmail', 'alex@gmail.com');
+    final bool hasLogined = prefs.getBool("hasLogined") ?? true;
+    if (hasLogined) {
+      prefs.setBool("hasLogined", false);
+    }
   }
 }// Send the ID token to your backend
 

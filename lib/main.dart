@@ -15,6 +15,9 @@ import 'package:image_size_getter_http_input/image_size_getter_http_input.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:cookie_jar/cookie_jar.dart';
+import 'package:dio_cookie_manager/dio_cookie_manager.dart';
+import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'dart:ui';
 import 'variables.dart';
@@ -70,13 +73,29 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<bool?>? haslogined;
   Future<bool?>? hasLogined() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('hasLogined');
+    return prefs.getBool('hasLogined') ?? false;
+  }
+
+  Future<void> Cookies() async {
+    final appDirectory = await getApplicationDocumentsDirectory();
+
+    final cookieJar = PersistCookieJar(
+      ignoreExpires: false,
+      storage: FileStorage('${appDirectory.path}/cookies'),
+    );
+
+    final dio = Dio();
+
+    dio.interceptors.add(
+      CookieManager(cookieJar),
+    );
   }
 
   @override
   void initState() {
     super.initState();
     haslogined = hasLogined();
+    Cookies();
   }
 
   @override
@@ -109,7 +128,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     loginToHompage();
   }
@@ -192,6 +210,17 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class test extends StatelessWidget {
+  const test({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Text("working"),
     );
   }
 }

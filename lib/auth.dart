@@ -26,6 +26,9 @@ class Authenticate {
             data: {},
             options: Options(headers: {"Authorization": "Bearer $idToken"}));
         print("Sending token: $idToken");
+        final cookies = response.headers['set-cookie'];
+
+        print(cookies);
         return response;
       } on DioError catch (e) {
         print("Dio error: ${e.message}");

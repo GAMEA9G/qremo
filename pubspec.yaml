@@ -25,6 +25,8 @@ dependencies:
   flutter_secure_storage: ^10.0.0
   google_sign_in: ^7.2.0
   shared_preferences: ^2.5.5
+  cookie_jar: ^4.0.9
+  dio_cookie_manager: ^3.5.0
 
 dev_dependencies:
   flutter_test:

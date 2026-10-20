@@ -2,6 +2,7 @@ part of 'main.dart';
 
 class Authenticate {
   final GoogleSignIn googleSignIn = GoogleSignIn.instance;
+
   Future<bool> signIn() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String serverClientId =
@@ -20,15 +21,18 @@ class Authenticate {
     final String? idToken = googleAuth.idToken;
     Future<dynamic> sendToken(String? idToken) async {
       try {
-        Dio dio = Dio();
-        Response response = await dio.post(
-            "https://qremo-backend.vercel.app/api/auth",
+        await cookies();
+        Response response = await dio.post("${About().apiUri}/auth",
             data: {},
             options: Options(headers: {"Authorization": "Bearer $idToken"}));
         print("Sending token: $idToken");
-        final cookies = response.headers['set-cookie'];
+        final cookiees = response.headers['set-cookie'];
 
-        print(cookies);
+        print(cookiees);
+        final savedCookies = await cookieJar.loadForRequest(
+          Uri.parse(About().apiUri),
+        );
+        print("savedCookies : $savedCookies");
         return response;
       } on DioError catch (e) {
         print("Dio error: ${e.message}");

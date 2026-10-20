@@ -1,10 +1,12 @@
 import 'dart:async';
 
+import 'package:flutter/services.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:qremo/post.dart';
 import 'package:qremo/variables.dart';
 import "dart:math";
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
@@ -18,10 +20,10 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:path_provider/path_provider.dart';
-import 'dart:io';
+import 'package:markdown_latex/markdown_latex.dart';
 import 'dart:ui';
-import 'variables.dart';
-
+import 'dart:convert';
+part 'login.dart';
 part 'colors.dart';
 part 'profile.dart';
 part 'notes.dart';
@@ -35,6 +37,25 @@ part 'custom-wigets.dart';
 part 'notemenu.dart';
 part 'html.dart';
 part 'auth.dart';
+part 'intialSetup.dart';
+
+late final PersistCookieJar cookieJar;
+final dio = Dio();
+Future<void> cookies() async {
+  final appDirectory = await getApplicationDocumentsDirectory();
+
+  cookieJar = PersistCookieJar(
+    ignoreExpires: false,
+    storage: FileStorage('${appDirectory.path}/cookies'),
+  );
+
+  dio.interceptors.add(
+    CookieManager(cookieJar),
+  );
+  final saved_cookie =
+      await cookieJar.loadForRequest(Uri.parse(About().apiUri));
+  print("saved cookie $saved_cookie");
+}
 
 List<String> subjectsList = [
   "Maths",
@@ -76,26 +97,10 @@ class _SplashScreenState extends State<SplashScreen> {
     return prefs.getBool('hasLogined') ?? false;
   }
 
-  Future<void> Cookies() async {
-    final appDirectory = await getApplicationDocumentsDirectory();
-
-    final cookieJar = PersistCookieJar(
-      ignoreExpires: false,
-      storage: FileStorage('${appDirectory.path}/cookies'),
-    );
-
-    final dio = Dio();
-
-    dio.interceptors.add(
-      CookieManager(cookieJar),
-    );
-  }
-
   @override
   void initState() {
     super.initState();
     haslogined = hasLogined();
-    Cookies();
   }
 
   @override
@@ -108,46 +113,13 @@ class _SplashScreenState extends State<SplashScreen> {
           }
           if (!snapshot.hasError && snapshot.hasData) {
             if (snapshot.data == true) {
-              return HomePage();
+              return appWalkthrough_01();
             } else {
               return LoginPage();
             }
           }
           return Text("An Error Occured");
         });
-  }
-}
-
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
-
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  @override
-  void initState() {
-    super.initState();
-    loginToHompage();
-  }
-
-  Future<void> loginToHompage() async {
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      bool success = await Authenticate().signIn();
-      if (success != false) {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (_) => const HomePage()),
-          (route) => false,
-        );
-      }
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(color: Theme.of(context).colorScheme.surface);
   }
 }
 
@@ -166,16 +138,32 @@ class _HomePageState extends State<HomePage> {
     const NotesPage(),
     const Profile()
   ];
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Qremo'),
+        elevation: 0.35,
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(25),
+          bottomRight: Radius.circular(25),
+        )),
+        shadowColor: Theme.of(context).brightness == Brightness.dark
+            ? mauveDark
+            : mauveLight,
+        title: const Text(
+          'Qremo',
+          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
         actions: [
           IconButton(
-            icon: Icon(Icons.task),
+            icon: Icon(Icons.notifications_rounded),
             onPressed: () {
               Navigator.push(
                 context,

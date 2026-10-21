@@ -1,3 +1,4 @@
+
 part of 'main.dart';
 
 class Authenticate {
@@ -48,6 +49,8 @@ class Authenticate {
 
       await prefs.setString('UserName', body["newUser"]["name"]);
       await prefs.setString('UserEmail', body["newUser"]["email"]);
+ await prefs.setString('UserId', body["newUser"]["id"]);
+
       await prefs.setBool('hasLogined', true);
 
       Future.delayed(Duration(milliseconds: 500));
@@ -65,7 +68,7 @@ class Authenticate {
       prefs.setBool("hasLogined", false);
     }
   }
-}// Send the ID token to your backend
+}
 
 
       

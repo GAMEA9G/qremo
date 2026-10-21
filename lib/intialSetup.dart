@@ -1,5 +1,10 @@
 part of 'main.dart';
 
+Future<String?> getUserId() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  return prefs.getString('UserId');
+}
+
 class appWalkthrough_01 extends StatelessWidget {
   const appWalkthrough_01({super.key});
 
@@ -51,12 +56,17 @@ class appWalkthrough_02 extends StatefulWidget {
 }
 
 class _appWalkthrough_02State extends State<appWalkthrough_02> {
+  final TextEditingController usernameController = TextEditingController();
   Future<String?>? userName;
+
   Future<String?> getUserName() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('UserName');
   }
-
+Future init() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  return prefs;
+}
   @override
   void initState() {
     super.initState();
@@ -71,6 +81,9 @@ class _appWalkthrough_02State extends State<appWalkthrough_02> {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return CircularProgressIndicator();
+          }
+          if (snapshot.hasData && usernameController.text.isEmpty) {
+            usernameController.text = snapshot.data!;
           }
           return Scaffold(
               appBar: AppBar(
@@ -110,7 +123,16 @@ class _appWalkthrough_02State extends State<appWalkthrough_02> {
                       child: Padding(
                           padding: EdgeInsetsGeometry.only(
                               right: 15, left: 15, bottom: 10, top: 15),
-                          child: TextFormField(initialValue: snapshot.data)))
+                          child:
+                              TextFormField(controller: usernameController))),
+                  TextButton(
+                      onPressed: () async {
+
+                        final userId = await getUserId();
+                        final newName = usernameController.text.trim();
+                        changeUsername(userId, newName);
+                      },
+                      child: Text("Change Username"))
                 ],
               ));
         });
@@ -128,22 +150,6 @@ class _appWalkthrough_03State extends State<appWalkthrough_03> {
   @override
   void initState() {
     super.initState();
-  }
-
-  Future<dynamic> getSylabuss() async {
-    try {
-      await cookies();
-      Response response = await dio.get(
-        "${About().apiUri}/Syllabus",
-      );
-
-      return response;
-    } on DioError catch (e) {
-      print("Dio error: ${e.message}");
-      print("Status: ${e.response?.statusCode}");
-      print("Data: ${e.response?.data}");
-      return null;
-    }
   }
 
   @override
@@ -165,27 +171,49 @@ class _appWalkthrough_03State extends State<appWalkthrough_03> {
           ),
           centerTitle: true,
         ),
-              
         body: FutureBuilder(
-          future: getSylabuss(),
-          builder: (BuildContext, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator();
-            }
+            future: getSylabuss(),
+            builder: (BuildContext, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator();
+              }
 
-            print("Sylabusses: ${snapshot.data.toString()}");
-            final List body = snapshot.data!.data as List;
-            final List<SyllabusPost> Sylabusses =
-                body.map((e) => SyllabusPost.fromJson(e)).toList();
-            return ListView.builder(
-                itemCount: Sylabusses.length,
-                itemBuilder: (context, int index) {
-                  return ThemedBox(
-                    height: 40,
-                    child: Align(alignment: Alignment.centerLeft,child :Padding(padding: EdgeInsetsGeometry.all(5),child: Text(Sylabusses[index].name.toString(),),))
-                  );
-                });
-          },
-        ));
+              print("Sylabusses: ${snapshot.data.toString()}");
+              final Map body = snapshot.data!.data;
+              final List<SyllabusPost> Sylabusses = (body['syllabus'] as List)
+                  .map((e) => SyllabusPost.fromJson(e as Map<String, dynamic>))
+                  .toList();
+
+              return ListView.builder(
+                  itemCount: Sylabusses.length,
+                  itemBuilder: (context, int index) {
+                    return GestureDetector(
+                        onTap: () async {
+                          final userId = await getUserId();
+
+                          if (userId == null) {
+                            print("User ID is null");
+                            return;
+                          }
+                          await setUserSyllabus(
+                              userId, Sylabusses[index].id?.toInt());
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(builder: (_) => const HomePage()),
+                            (route) => false,
+                          );
+                        },
+                        child: ThemedBox(
+                            height: 50,
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Padding(
+                                  padding: EdgeInsetsGeometry.all(5),
+                                  child: Text(
+                                    Sylabusses[index].name.toString(),
+                                  ),
+                                ))));
+                  });
+            }));
   }
 }

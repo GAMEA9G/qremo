@@ -25,6 +25,7 @@ import 'dart:ui';
 import 'dart:convert';
 part 'login.dart';
 part 'colors.dart';
+part 'request.dart';
 part 'profile.dart';
 part 'notes.dart';
 part 'quiz.dart';
@@ -38,7 +39,7 @@ part 'notemenu.dart';
 part 'html.dart';
 part 'auth.dart';
 part 'intialSetup.dart';
-
+bool cookieJarInitialized = false;
 late final PersistCookieJar cookieJar;
 final dio = Dio();
 Future<void> cookies() async {

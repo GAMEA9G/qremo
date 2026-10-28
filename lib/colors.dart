@@ -35,6 +35,9 @@ Color surface1Dark = Color.fromRGBO(69, 71, 90,1 );
 Color surface0Dark = Color.fromRGBO(49, 50, 68, 1);
 Color textDark =  Color.fromRGBO(205, 214, 244, 1) ;
 Color textLight = Color.fromRGBO(76, 79, 105, 1);
+Color subtext0Light = Color.fromRGBO(108, 111, 133, 1);
+Color subtext0Dark = Color.fromRGBO(116, 173, 200, 1);
+
 Color baseDark =  Color.fromRGBO(30, 30, 46, 1);
 Color baseLight = Color.fromRGBO(239, 241, 245, 1);
 Color mantleDark =  Color.fromRGBO(24,24, 27, 1) ;

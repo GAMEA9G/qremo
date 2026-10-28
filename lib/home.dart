@@ -1,7 +1,6 @@
 part of 'main.dart';
 
 class HomePageNew extends StatefulWidget {
- 
   const HomePageNew({super.key});
 
   @override
@@ -24,7 +23,7 @@ class _HomePageNew extends State<HomePageNew> {
   Future<String?> getUserEmail() async {
     await Authenticate().userInfo();
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-return prefs.getString('UserEmail');
+    return prefs.getString('UserEmail');
   }
 
   Future<String?> isNewUser() async {
@@ -47,107 +46,120 @@ return prefs.getString('UserEmail');
         Theme.of(context).brightness == Brightness.dark ? true : false;
     return Scaffold(
         body: Container(
-            alignment: Alignment.topLeft,
-            margin: const EdgeInsets.only(left: 15, right: 15),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surface,
-              borderRadius: BorderRadius.circular(15.0),
+              color: isDarktheme ? baseDark : baseLight,
             ),
-            child: SingleChildScrollView(
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    FutureBuilder(
-                      future: userName,
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return Center(child: CircularProgressIndicator());
-                        }
-                        if (snapshot.hasError) {
-                          return Center(child: Text(snapshot.error.toString()));
-                        }
-                        if (snapshot.hasData) {
-                          return Builder(builder: (context) {
-                            final random = Random();
-                            final greetingMorningMsg =
-                                GreetingMessage().morning[random.nextInt(
-                                    GreetingMessage().morning.length - 1)];
-                            final greetingEveningMsg =
-                                GreetingMessage().evening[random.nextInt(
-                                    GreetingMessage().evening.length - 1)];
+            child: Container(
+                alignment: Alignment.topLeft,
+                
+            margin: EdgeInsets.all(10),
+                child: SingleChildScrollView(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        FutureBuilder(
+                          future: userName,
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Center(child: CircularProgressIndicator());
+                            }
+                            if (snapshot.hasError) {
+                              return Center(
+                                  child: Text(snapshot.error.toString()));
+                            }
+                            if (snapshot.hasData) {
+                              return Builder(builder: (context) {
+                                final random = Random();
+                                final greetingMorningMsg =
+                                    GreetingMessage().morning[random.nextInt(
+                                        GreetingMessage().morning.length - 1)];
+                                final greetingEveningMsg =
+                                    GreetingMessage().evening[random.nextInt(
+                                        GreetingMessage().evening.length - 1)];
 
-                            if (DateTime.now().hour < 12) {
-                              return Builder(builder: (context) {
-                                if (greetingMorningMsg == "Good Morning,") {
-                                  return Padding(
-                                      padding: EdgeInsetsGeometry.all(20),
-                                      child: Text(greetingMorningMsg,
-                                          style: TextStyle(
-                                              fontSize: 30,
-                                              color: isDarktheme
-                                                  ? textDark
-                                                  : textLight)));
-                                } else {
-                                  return Row(children: [
-                                    Text('$greetingMorningMsg , ${snapshot.data} ',
-                                        style: TextStyle(
-                                            fontSize: 30,
-                                            color: isDarktheme
-                                                ? textDark
-                                                : textLight)),
-                                  ]);
-                                }
-                              });
-                            } else {
-                              return Builder(builder: (context) {
-                                if (greetingEveningMsg == "Good Evening,") {
-                                  return Padding(
-                                      padding: EdgeInsetsGeometry.all(50),
-                                      child: Text(greetingEveningMsg,
-                                          style: TextStyle(
-                                              fontSize: 30,
-                                              color: isDarktheme
-                                                  ? textDark
-                                                  : textLight)));
-                                } else {
-                                  return Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                            padding: EdgeInsetsGeometry.all(7),
-                                            child: Text(
-                                                "${greetingEveningMsg} , ${snapshot.data}",
-                                                style: TextStyle(
-                                                    fontSize: 25,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: isDarktheme
-                                                        ? textDark
-                                                        : textLight)))
+                                if (DateTime.now().hour < 12) {
+                                  return Builder(builder: (context) {
+                                    if (greetingMorningMsg == "Good Morning,") {
+                                      return Padding(
+                                          padding: EdgeInsetsGeometry.all(20),
+                                          child: Text(greetingMorningMsg,
+                                              style: TextStyle(
+                                                  fontSize: 30,
+                                                  color: isDarktheme
+                                                      ? textDark
+                                                      : textLight)));
+                                    } else {
+                                      return Row(children: [
+                                        Text(
+                                            '$greetingMorningMsg , ${snapshot.data} ',
+                                            style: TextStyle(
+                                                fontSize: 30,
+                                                color: isDarktheme
+                                                    ? textDark
+                                                    : textLight)),
                                       ]);
+                                    }
+                                  });
+                                } else {
+                                  return Builder(builder: (context) {
+                                    if (greetingEveningMsg == "Good Evening,") {
+                                      return Padding(
+                                          padding: EdgeInsetsGeometry.all(50),
+                                          child: Text(greetingEveningMsg,
+                                              style: TextStyle(
+                                                  fontSize: 30,
+                                                  color: isDarktheme
+                                                      ? textDark
+                                                      : textLight)));
+                                    } else {
+                                      return Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                                padding:
+                                                    EdgeInsetsGeometry.all(7),
+                                                child: Text(
+                                                    "${greetingEveningMsg} , ${snapshot.data}",
+                                                    style: TextStyle(
+                                                        fontSize: 25,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: isDarktheme
+                                                            ? textDark
+                                                            : textLight)))
+                                          ]);
+                                    }
+                                  });
                                 }
                               });
                             }
-                          });
-                        }
-                        return Center(child: Text(snapshot.error.toString()));
-                      },
-                    ),
-                    SizedBox(
-                      height: 180,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: subjectsList.length,
-                        itemBuilder: (context, i) {
-                          return Card(isDarktheme: isDarktheme);}
-                      ),
-                    ),
-
-                   
-                    SizedBox(height: 18.0)
-                  ]),
-            )));
+                            return Center(
+                                child: Text(snapshot.error.toString()));
+                          },
+                        ),
+                        Text(
+                          "Continue Learning",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        horizontalCardList(isDarktheme: isDarktheme),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          "Suggested for you",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        horizontalCardList(isDarktheme: isDarktheme),
+                      ]),
+                ))));
   }
 }

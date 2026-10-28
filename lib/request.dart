@@ -4,7 +4,6 @@ Future<dynamic> getSylabuss() async {
   try {
     if (!cookieJarInitialized) {
       await cookies();
-      cookieJarInitialized = true;
     }
 
     Response response = await dio.get(
@@ -24,7 +23,7 @@ Future<dynamic> setUserSyllabus(id, SylabussId) async {
   try {
     if (!cookieJarInitialized) {
       await cookies();
-      cookieJarInitialized = true;
+      
     }
 
     Response response = await dio.post("${About().apiUri}/user",

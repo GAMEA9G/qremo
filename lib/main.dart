@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:m3e_progress_indicator/m3e_progress_indicator.dart';
 import 'package:flutter/services.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +43,7 @@ bool cookieJarInitialized = false;
 late final PersistCookieJar cookieJar;
 final dio = Dio();
 Future<void> cookies() async {
+if (cookieJarInitialized) return;
   final appDirectory = await getApplicationDocumentsDirectory();
 
   cookieJar = PersistCookieJar(
@@ -56,6 +57,8 @@ Future<void> cookies() async {
   final saved_cookie =
       await cookieJar.loadForRequest(Uri.parse(About().apiUri));
   print("saved cookie $saved_cookie");
+cookieJarInitialized = true;
+
 }
 
 List<String> subjectsList = [
@@ -114,7 +117,7 @@ class _SplashScreenState extends State<SplashScreen> {
           }
           if (!snapshot.hasError && snapshot.hasData) {
             if (snapshot.data == true) {
-              return appWalkthrough_01();
+              return HomePage();
             } else {
               return LoginPage();
             }
@@ -134,6 +137,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
+
   final List<Widget> _screens = [
     const HomePageNew(),
     const NotesPage(),
@@ -146,8 +150,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+ final isDarktheme = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
+
+    backgroundColor:isDarktheme? baseDark:baseLight ,
       appBar: AppBar(
+      backgroundColor:isDarktheme? mantleDark:mantleLight  ,
+      
         elevation: 0.35,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -176,6 +185,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: _screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+      backgroundColor: isDarktheme? mantleDark:mantleLight,
         currentIndex: _currentIndex,
         onTap: (index) => setState(() => _currentIndex = index),
         unselectedItemColor: Theme.of(context).brightness == Brightness.dark

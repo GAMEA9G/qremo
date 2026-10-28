@@ -36,62 +36,90 @@ class ThemedBox extends StatelessWidget {
   }
 }
 
-class Card extends StatelessWidget {
+class Card extends StatefulWidget {
   final bool isDarktheme;
 
   const Card({Key? key, required this.isDarktheme}) : super(key: key);
+
+  @override
+  State<Card> createState() => _CardState();
+}
+
+class _CardState extends State<Card> {
+  double progress = 0.75;
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 170,
-      width: 145,
-      margin: const EdgeInsets.symmetric(horizontal: 5),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: isDarktheme ? baseDark : baseLight,
-          border: Border.all(
-              color: isDarktheme ? mauveDark : mauveLight, width: 0.65)),
-      child: Column(
-        children: [
-          Row(
+        height: 210,
+        width: 160,
+        margin: const EdgeInsets.symmetric(horizontal: 5),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            color: widget.isDarktheme ? surface0Dark : surface0Light,
+            border: Border.all(
+                color: widget.isDarktheme ? surface1Dark : surface1Light,
+                width: 0.65)),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Tag(
-                isDarktheme: isDarktheme,
-                text: "Beginner",
-                darkThemeColor: yellowDark,
-                lightThemeColor: yellowLight,
-              ),
-              Tag(
-                  isDarktheme: isDarktheme,
-                  text: "Lv:01",
-                  darkThemeColor: greenDark,
-                  lightThemeColor: greenlight)
-            ],
-          ),
-          Align(
-            alignment: Alignment.topCenter,
-            child: Center(child: SleekCircularSlider(
-              innerWidget: (double value) {
-                return Stack(
-                  children: [
-                    Center(child: Icon(
-                      Icons.star,
-                      size: 60,color: isDarktheme? surface2Dark:surface2Light,
-                    ),),
-                    Center(child: Text(value.toString()))
-                  ],
-                );
-              },
-              min: 0,
-              max: 9,
-              initialValue: 0,
-              
-              appearance: CircularSliderAppearance(size: 80,customWidths: CustomSliderWidths(trackWidth: 5,handlerSize: 0)),
-            ),)
-          )
-        ],
-      ),
-    );
+              Padding(
+                  padding: EdgeInsetsGeometry.only(
+                      left: 10, right: 10, bottom: 0, top: 10),
+                  child: Text("Motion in a Straight Line",
+                      style: TextStyle(
+                        color: widget.isDarktheme ? textDark : textLight,
+                        fontWeight: FontWeight.bold,
+                      ))),
+              Padding(padding: EdgeInsets.all(10),child: Align(
+                alignment: Alignment.centerLeft,
+                child: SizedBox(
+                    width: 75,
+                    height: 75,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        M3ECircularWavyProgressIndicator(
+                          value: progress,
+                          color: widget.isDarktheme ? mauveDark : mauveLight,
+                          backgroundColor:
+                              widget.isDarktheme ? surface1Dark : surface1Light,
+                          size: 65,
+                          strokeWidth: 4.00,
+                          trackStrokeWidth: 3.50,
+                          gapSize: 4.00,
+                          wavelength: 20.00,
+                          waveSpeed: 10.00,
+                        ),
+                        Stack(children: [
+                          Center(
+                              child: Icon(
+                            Icons.star_rounded,
+                            size: 50,
+                            color:
+                                widget.isDarktheme ? peachDark : peachLight,
+                          )),
+                          Center(
+                            child: Text(
+                              (progress * 10).toString(),
+                              style: TextStyle(
+                                  color: widget.isDarktheme
+                                      ? textDark
+                                      : textLight),
+                            ),
+                          )
+                        ]),
+                      ],
+                    )),
+              )),
+              Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text(
+                    "Physics",
+                    style: TextStyle(
+                        color: widget.isDarktheme ? subtext0Dark : subtext0Light),
+                  ))
+            ]));
   }
 }
 
@@ -125,5 +153,36 @@ class Tag extends StatelessWidget {
                   ? Color.fromRGBO(0, 0, 0, 1)
                   : Color.fromRGBO(255, 255, 255, 1)),
         ));
+  }
+}
+
+class horizontalCardList extends StatefulWidget {
+  final bool isDarktheme;
+
+  const horizontalCardList({super.key, required this.isDarktheme});
+
+  @override
+  State<horizontalCardList> createState() => _horizontalCardListState();
+}
+
+class _horizontalCardListState extends State<horizontalCardList> {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 210,
+      child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: subjectsList.length,
+          itemBuilder: (context, i) {
+            return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => Practice()),
+                  );
+                },
+                child: Card(isDarktheme: widget.isDarktheme));
+          }),
+    );
   }
 }

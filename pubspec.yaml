@@ -28,6 +28,7 @@ dependencies:
   cookie_jar: ^4.0.9
   dio_cookie_manager: ^3.5.0
   markdown_latex: ^0.1.6
+  m3e_progress_indicator: ^0.0.3
 
 dev_dependencies:
   flutter_test:
